@@ -113,7 +113,7 @@ class _OurLocationsState extends State<OurLocations> {
                           : '',
                       latitude: list[i].latitude,
                       longitude: list[i].longitude,
-                      address:Info.mapAddress[i],
+                      address: list[i].mapAddress,
                     ),
                   );
                 },
@@ -152,6 +152,7 @@ class _OurLocationsState extends State<OurLocations> {
       serviceItem.address = Info.address[i];
       serviceItem.latitude = Info.latitude[i];
       serviceItem.longitude = Info.longitude[i];
+      serviceItem.mapAddress = Info.mapAddress[i];
       serviceItem.distance = calculateDistance(
           Info.latitude[i], Info.longitude[i], latitude, longitude);
       list.add(serviceItem);

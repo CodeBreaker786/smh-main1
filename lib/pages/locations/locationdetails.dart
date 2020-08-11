@@ -3,12 +3,9 @@ import 'dart:io' show Platform;
 import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
-import 'package:geocoder/services/base.dart';
-
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sarasotaapp/appsettings.dart';
 import 'package:sarasotaapp/model/locationitem.dart';
-
 import 'package:sarasotaapp/uatheme.dart';
 import 'package:sarasotaapp/widgets/uabutton.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
@@ -102,18 +99,11 @@ class _LocationDetailsState extends State<LocationDetails> {
                           final AndroidIntent intent = new AndroidIntent(
                               action: 'action_view',
                               data: Uri.encodeFull(
-                                  "https://www.google.com/maps/dir/?api=1&origin=" +
-                                      origin +
-                                      "&destination=" +
-                                      destination +
-                                      "&travelmode=driving&dir_action=navigate"),
+                                  "https://www.google.com/maps/place/${widget.address}"),
                               package: 'com.google.android.apps.maps');
                           intent.launch();
                         } else {
                           PermissionGroup.locationAlways;
-
-                         
-                         
 
                           //  print(address.first.toMap());
                           final destination =

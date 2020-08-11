@@ -4,11 +4,8 @@ import 'package:sarasotaapp/pages/favorites.dart';
 import 'package:sarasotaapp/pages/home.dart';
 import 'package:sarasotaapp/pages/privacypolicy.dart';
 import 'package:sarasotaapp/pages/socialmedia.dart';
-import 'package:sarasotaapp/pages/webview.dart';
-import 'package:sarasotaapp/uatheme.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:store_redirect/store_redirect.dart';
 
 class Menu extends StatelessWidget {
   @override
@@ -21,10 +18,7 @@ class Menu extends StatelessWidget {
           Container(
             color: Color(0xff639EC7),
             child: ListTile(
-              title: new UALabel(
-                  size: UATheme.headingSize(),
-                  text: 'smh',
-                  color: Colors.white),
+              title: new UALabel(size: 30.0, text: 'smh', color: Colors.white),
             ),
           ),
           ListTile(
@@ -94,6 +88,24 @@ class Menu extends StatelessWidget {
             ),
           ),
           line(),
+          SizedBox(
+            height: 300.0,
+          ),
+          GestureDetector(
+            onTap: () {
+              _launchURL('https://smh.com');
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/smhblueicon.png',
+                  height: 150.0,
+                  width: 150.0,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -108,7 +120,7 @@ class Menu extends StatelessWidget {
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
-      await launch(url);
+      await launch(url, enableJavaScript: true, forceSafariVC: false);
     } else {
       throw 'Could not launch $url';
     }

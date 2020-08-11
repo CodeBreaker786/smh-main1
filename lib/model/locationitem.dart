@@ -7,4 +7,5 @@ class LocationItem {
   double latitude;
   double longitude;
   String distance;
+  String mapAddress;
 }
