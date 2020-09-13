@@ -12,6 +12,8 @@ import 'package:sarasotaapp/uatheme.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'FindADoctor/doctorsearch.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -48,7 +50,11 @@ class _HomeState extends State<Home> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      _launchURL('https://www.smh.com/home/mobile-fad');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                          return DoctorSearch();
+                        }),
+                      );
                     },
                     child: Image(
                       image: new AssetImage("assets/images/m1.png"),

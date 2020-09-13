@@ -9,11 +9,11 @@ import 'package:sarasotaapp/model/regions.dart';
 import 'package:sarasotaapp/model/user.dart';
 
 class NetworkHelper {
-  static String key = "824Kq4x8sDz54AF0o753g3eQpSaT8T1X";
+  static String key = "Z5s75QIr8YnS1cziUwNl0aJHM1Ol9HR1";
 
   static getAgeGroups() async {
     String url =
-        'https://apiscsandbox.isabelhealthcare.com/v2/age_groups?language=english&web_service=json';
+        'https://apisc.isabelhealthcare.com/v2/age_groups?language=english&web_service=json';
 
     var response =
         await http.get(url, headers: {HttpHeaders.authorizationHeader: key});
@@ -29,7 +29,7 @@ class NetworkHelper {
 
   static getRegions() async {
     String url =
-        'https://apiscsandbox.isabelhealthcare.com/v2/regions?language=english&web_service=json';
+        'https://apisc.isabelhealthcare.com/v2/regions?language=english&web_service=json';
 
     var response =
         await http.get(url, headers: {HttpHeaders.authorizationHeader: key});
@@ -45,7 +45,7 @@ class NetworkHelper {
 
   static getPregnancies() async {
     String url =
-        'https://apiscsandbox.isabelhealthcare.com/v2/pregnancies?language=english&web_service=json';
+        'https://apisc.isabelhealthcare.com/v2/pregnancies?language=english&web_service=json';
 
     var response =
         await http.get(url, headers: {HttpHeaders.authorizationHeader: key});
@@ -61,7 +61,7 @@ class NetworkHelper {
 
   static getDiagnosis(User user) async {
     String url =
-        'https://apiscsandbox.isabelhealthcare.com/v2/ranked_differential_diagnoses?' +
+        'https://apisc.isabelhealthcare.com/v2/ranked_differential_diagnoses?' +
             'specialties=28' +
             '&dob=${user.age}' +
             '&sex=${user.gender}' +
@@ -87,8 +87,7 @@ class NetworkHelper {
   }
 
   static getTriageScore(User user) async {
-    String url =
-        'https://apiscsandbox.isabelhealthcare.com/v2/triage_score?dx=1'
+    String url = 'https://apisc.isabelhealthcare.com/v2/triage_score?dx=1'
         '&age=${user.age}'
         '&sex=${user.gender}'
         '&region=${user.region}'

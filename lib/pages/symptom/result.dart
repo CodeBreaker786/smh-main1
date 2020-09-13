@@ -62,82 +62,79 @@ class _ResultState extends State<Result> {
   Widget build(BuildContext context) {
     UATheme.init(context);
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: UALabel(
-            text: 'Symptom Checker',
-            size: UATheme.headingSize(),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: UALabel(
+          text: 'Symptom Checker',
+          size: UATheme.headingSize(),
         ),
-        body: ModalProgressHUD(
-          inAsyncCall: isLoading,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(20, 40, 20, 30),
-                child: UALabel(
-                  alignment: TextAlign.center,
-                  text:
-                      'This is just a suggestion of where you chould go now and should not be relied on over and above your own instinct and judgement',
-                  color: Colors.black,
-                ),
+      ),
+      body: ModalProgressHUD(
+        inAsyncCall: isLoading,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 40, 20, 30),
+              child: UALabel(
+                alignment: TextAlign.center,
+                text:
+                    'This is just a suggestion of where you chould go now and should not be relied on over and above your own instinct and judgement',
+                color: Colors.black,
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                child: SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    activeTrackColor: Colors.white,
-                    inactiveTrackColor: Colors.white,
-                    trackHeight: 1.0,
-                    thumbColor: Colors.black,
-                    thumbShape: SliderThumbImage(customImage),
-                    overlayShape: SliderThumbImage(customImage),
-                  ),
-                  child: Slider(
-                      value:
-                          triageScore != "" ? int.parse(triageScore) / 100 : 0,
-                      onChanged: (value) {
-                        setState(() {});
-                      }),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  activeTrackColor: Colors.white,
+                  inactiveTrackColor: Colors.white,
+                  trackHeight: 1.0,
+                  thumbColor: Colors.black,
+                  thumbShape: SliderThumbImage(customImage),
+                  overlayShape: SliderThumbImage(customImage),
                 ),
+                child: Slider(
+                    value: triageScore != "" ? int.parse(triageScore) / 100 : 0,
+                    onChanged: (value) {
+                      setState(() {});
+                    }),
               ),
-              Container(
-                height: 90,
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Image.asset(
-                        'assets/images/bar.png',
-                        fit: BoxFit.fill,
-                        height: 40,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            ),
+            Container(
+              height: 90,
+              padding: EdgeInsets.all(20),
+              child: Column(
                 children: <Widget>[
-                  UALabel(text: 'Walk-in Clinic'),
-                  UALabel(text: 'Family Doctor'),
-                  UALabel(text: 'Emergency')
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Image.asset(
+                      'assets/images/bar.png',
+                      fit: BoxFit.fill,
+                      height: 40,
+                    ),
+                  ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: UALabel(
-                  alignment: TextAlign.center,
-                  text:
-                      'Symptom checker is designed to help you decide where to seek professional medical advice. Symptom checker uses the results from the Symptoms you have just entered and then combines them with your answers to the seven questions to give a total score which is displayed on the bar above',
-                  color: Colors.grey,
-                ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                UALabel(text: 'Walk-in Clinic'),
+                UALabel(text: 'Family Doctor'),
+                UALabel(text: 'Emergency')
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: UALabel(
+                alignment: TextAlign.center,
+                text:
+                    'Symptom checker is designed to help you decide where to seek professional medical advice. Symptom checker uses the results from the Symptoms you have just entered and then combines them with your answers to the seven questions to give a total score which is displayed on the bar above',
+                color: Colors.grey,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

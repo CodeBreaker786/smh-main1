@@ -113,11 +113,8 @@ class _OurLocationsState extends State<OurLocations> {
                           : '',
                       latitude: list[i].latitude,
                       longitude: list[i].longitude,
-<<<<<<< HEAD
                       address: list[i].mapAddress,
-=======
-                      address:list[i].address,
->>>>>>> ac8caddee613ff43602e164c6066ff8906bde084
+                      //address:list[i].address,
                     ),
                   );
                 },
