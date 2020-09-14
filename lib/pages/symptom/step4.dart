@@ -75,7 +75,7 @@ class _Step4State extends State<Step4> {
                       onChanged: (newValue) =>
                           setState(() => symptomsTime = newValue),
                       title: UALabel(
-                        text: 'Over hours',
+                        text: 'Over Hours',
                         color: Colors.black,
                         size: UATheme.normalSize(),
                       ),

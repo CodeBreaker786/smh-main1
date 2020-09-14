@@ -120,7 +120,7 @@ class _ResultState extends State<Result> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                UALabel(text: 'Walk-in Clinic'),
+                UALabel(text: 'Urgent Care'),
                 UALabel(text: 'Family Doctor'),
                 UALabel(text: 'Emergency')
               ],

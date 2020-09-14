@@ -35,9 +35,9 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.soln.SE35BCA74A3BE95A854E67E90FEB1DBB3"
         minSdkVersion 16
-        targetSdkVersion 28
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        targetSdkVersion 30
+        versionCode 5
+        versionName '5.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

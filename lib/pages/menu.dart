@@ -57,18 +57,18 @@ class Menu extends StatelessWidget {
               color: Colors.grey.shade700,
             ),
           ),
-          line(),
-          ListTile(
-            onTap: () {
-              Navigation.closeOpen(context, Favorites());
-            },
-            title: UALabel(
-              text: 'Favorites',
-              paddingTop: 15,
-              paddingBottom: 15,
-              color: Colors.grey.shade700,
-            ),
-          ),
+          // line(),
+          // ListTile(
+          //   onTap: () {
+          //     Navigation.closeOpen(context, Favorites());
+          //   },
+          //   title: UALabel(
+          //     text: 'Favorites',
+          //     paddingTop: 15,
+          //     paddingBottom: 15,
+          //     color: Colors.grey.shade700,
+          //   ),
+          // ),
           line(),
           ListTile(
             onTap: () {

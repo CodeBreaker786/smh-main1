@@ -21,7 +21,7 @@ class _Step1State extends State<Step1> {
   AgeGroups ageGroups;
   Regions regions;
   String selectedAge = "Select Age";
-  String selectedRegion = "Region";
+  String selectedRegion = "North America";
   String selectedRegionId = "0";
   String ageGroupId = "0";
 
