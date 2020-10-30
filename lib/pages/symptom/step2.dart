@@ -109,7 +109,7 @@ class _Step2State extends State<Step2> {
                         Navigator.of(context).pushReplacement(
                             new MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    new Step1()));
+                                    new SymptomChecker()));
                       },
                       color: Colors.grey.shade600,
                     ),

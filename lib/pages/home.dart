@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
                       );
                     },
                     child: Image(
-                      image: new AssetImage("assets/images/m1.png"),
+                      image: AssetImage("assets/images/main/findadoctor1.png"),
                       width: UATheme.screenWidth * 0.45,
                       height: UATheme.screenWidth * 0.45,
                     ),
@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
                       );
                     },
                     child: Image(
-                      image: new AssetImage("assets/images/m2.png"),
+                      image: new AssetImage("assets/images/main/ourservices1.png"),
                       width: UATheme.screenWidth * 0.45,
                       height: UATheme.screenWidth * 0.45,
                     ),
@@ -90,12 +90,12 @@ class _HomeState extends State<Home> {
                     onTap: () {
                       Navigator.of(context).push(
                         new MaterialPageRoute(
-                          builder: (BuildContext context) => new Step1(),
+                          builder: (BuildContext context) => new SymptomChecker(),
                         ),
                       );
                     },
                     child: Image(
-                      image: new AssetImage("assets/images/m3.png"),
+                      image: new AssetImage("assets/images/main/symptomchecker.png"),
                       width: UATheme.screenWidth * 0.45,
                       height: UATheme.screenWidth * 0.45,
                     ),
@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
                       );
                     },
                     child: Image(
-                      image: new AssetImage("assets/images/m4.png"),
+                      image: new AssetImage("assets/images/main/surgerystatus1.png"),
                       width: UATheme.screenWidth * 0.45,
                       height: UATheme.screenWidth * 0.45,
                     ),
@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
                       );
                     },
                     child: Image(
-                      image: new AssetImage("assets/images/m5.png"),
+                      image: new AssetImage("assets/images/main/locations1.png"),
                       width: UATheme.screenWidth * 0.45,
                       height: UATheme.screenWidth * 0.45,
                     ),
@@ -155,7 +155,7 @@ class _HomeState extends State<Home> {
                       );
                     },
                     child: Image(
-                      image: new AssetImage("assets/images/events1.png"),
+                      image: new AssetImage("assets/images/main/wayfinder1.png"),
                       width: UATheme.screenWidth * 0.45,
                       height: UATheme.screenWidth * 0.45,
                     ),

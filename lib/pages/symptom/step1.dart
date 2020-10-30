@@ -9,12 +9,12 @@ import 'package:sarasotaapp/uatheme.dart';
 import 'package:sarasotaapp/widgets/roundedbutton.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
 
-class Step1 extends StatefulWidget {
+class SymptomChecker extends StatefulWidget {
   @override
-  _Step1State createState() => _Step1State();
+  _SymptomCheckerState createState() => _SymptomCheckerState();
 }
 
-class _Step1State extends State<Step1> {
+class _SymptomCheckerState extends State<SymptomChecker> {
   bool isLoading = true;
   int isMale = 1;
   int isPregnant = 0;
