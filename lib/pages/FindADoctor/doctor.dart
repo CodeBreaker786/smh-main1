@@ -69,7 +69,8 @@ class Doctor {
           mobilePhone: parsedJson['MobilePhone'],
           phone: parsedJson['Phone'],
           image: urls[0],
-          specialities: parsedJson['Provider_Specialties__c'],
+          specialities: parsedJson['Website_Provider_Specialties__c'],
+          //old: "Provider_Specialties__c"
           boardCertifications: parsedJson['Board_Certifications__c'],
           website: parsedJson['Import_website__c'],
           address: Address.fromJson(parsedJson['MailingAddress']),

@@ -155,7 +155,7 @@ class _HomeState extends State<Home> {
                       );
                     },
                     child: Image(
-                      image: new AssetImage("assets/images/m6.png"),
+                      image: new AssetImage("assets/images/events1.png"),
                       width: UATheme.screenWidth * 0.45,
                       height: UATheme.screenWidth * 0.45,
                     ),
