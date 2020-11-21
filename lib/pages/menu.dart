@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sarasotaapp/navigation.dart';
-import 'package:sarasotaapp/pages/favorites.dart';
-import 'package:sarasotaapp/pages/home.dart';
 import 'package:sarasotaapp/pages/privacypolicy.dart';
 import 'package:sarasotaapp/pages/socialmedia.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'file:///D:/develapment/USA/lib/pages/home_page/home.dart';
 
 class Menu extends StatelessWidget {
   @override

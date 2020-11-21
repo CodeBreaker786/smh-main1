@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:sarasotaapp/appsettings.dart';
 import 'package:sarasotaapp/navigation.dart';
-import 'package:sarasotaapp/pages/home.dart';
 import 'package:sarasotaapp/uatheme.dart';
-import 'package:sarasotaapp/widgets/ualabel.dart';
+
+import 'file:///D:/develapment/USA/lib/pages/home_page/home.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,7 +13,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   void handleTimeout() async {
-    Navigation.closeOpen(context, new Home());
+    Navigation.closeOpen(context, Home());
   }
 
   startTimeout() async {
