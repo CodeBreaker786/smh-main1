@@ -5,7 +5,7 @@ import 'package:sarasotaapp/pages/socialmedia.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'file:///D:/develapment/USA/lib/pages/home_page/home.dart';
+import 'home_page/home.dart';
 
 class Menu extends StatelessWidget {
   @override

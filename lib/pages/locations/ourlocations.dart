@@ -27,17 +27,16 @@ class _OurLocationsState extends State<OurLocations> {
     super.initState();
     getData();
   }
-
-  getData() async {
+getData() async {
     await getLocation();
     setData();
     setState(() {
       list.sort((a, b) => Comparable.compare(
           double.parse(a.distance), double.parse(b.distance)));
-      ;
       isLoading = false;
     });
   }
+  
 
   checkPermission() async {
     p.PermissionStatus permission = await p.PermissionHandler()

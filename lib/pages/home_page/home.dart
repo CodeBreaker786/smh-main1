@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sarasotaapp/colors.dart';
+import 'package:sarasotaapp/model/locationitem.dart';
+import 'package:sarasotaapp/navigation.dart';
 import 'package:sarasotaapp/pages/FindADoctor/doctorsearch.dart';
 import 'package:sarasotaapp/pages/home_page/nearest_locations.dart';
+import 'package:sarasotaapp/pages/locations/locationdetails.dart';
 import 'package:sarasotaapp/pages/menu.dart';
 import 'package:sarasotaapp/pages/services/ourservices.dart';
 import 'package:sarasotaapp/pages/surgerystatus.dart';
 import 'package:sarasotaapp/pages/symptom/step1.dart';
 
 class Home extends StatefulWidget {
+  List<LocationItem> cardsData = List();
+  Home({this.cardsData});
   @override
   _HomeState createState() => _HomeState();
 }
@@ -191,7 +196,7 @@ class _HomeState extends State<Home> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            NearestLocations()));
+                                            NearestLocations(cardsData: widget.cardsData)));
                               },
                               child: Text(
                                 'SEE ALL',
@@ -204,17 +209,29 @@ class _HomeState extends State<Home> {
                             margin: EdgeInsets.only(left: 14),
                             height: MediaQuery.of(context).size.height * .33,
                             child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                _buildListCard(path: 'assets/images/heart.jpg'),
-                                _buildListCard(path: 'assets/images/i21.jpeg'),
-                                _buildListCard(path: 'assets/images/heart.jpg'),
-                                _buildListCard(path: 'assets/images/heart.jpg'),
-                                _buildListCard(path: 'assets/images/heart.jpg'),
-                                _buildListCard(path: 'assets/images/heart.jpg'),
-                                _buildListCard(path: 'assets/images/heart.jpg'),
-                              ],
-                            ),
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  ...widget.cardsData.map(
+                                    (e) => _buildListCard(
+                                        path: e.image, 
+                                        title: e.title,
+                                        callBack: () {
+                                           Navigation.open(
+                    context,
+                    LocationDetails(
+                      info:  e,
+                      distance: e.distance != null
+                          ? '${e.distance} mi'
+                          : '',
+                      latitude: e.latitude,
+                      longitude: e.longitude,
+                      address: e.mapAddress,
+                      //address:list[i].address,
+                    ),
+                  );
+                                        }),
+                                  )
+                                ]),
                           ),
                           Expanded(
                             child: Container(
@@ -269,48 +286,57 @@ class _HomeState extends State<Home> {
   }
 
   _buildListCard({String title, String path, Function callBack}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            clipBehavior: Clip.antiAlias,
-            width: MediaQuery.of(context).size.width * .5,
-            height: MediaQuery.of(context).size.height * .2,
-            decoration: BoxDecoration(
-                color: Colors.amber, borderRadius: BorderRadius.circular(10)),
-            child: Image.asset(
-              path,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, left: 5),
-            child: Text(
-              'Hospital Name',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black,
+    return InkWell(
+      onTap: () {
+        callBack();
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+        ),
+        child: Container(
+               width: MediaQuery.of(context).size.width * .5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                clipBehavior: Clip.antiAlias,
+           
+                height: MediaQuery.of(context).size.height * .2,
+                decoration: BoxDecoration(
+                    color: Colors.amber, borderRadius: BorderRadius.circular(10)),
+                child: Image.asset(
+                  path,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, left: 5),
-            child: Text(
-              'Sarasota , Florida',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
+              Padding(
+                padding: const EdgeInsets.only(top: 5, left: 5),
+                child: Text(
+                  title,
+                  //overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, left: 5),
+                child: Text(
+                  'Sarasota , Florida',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
