@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   startTimeout() async {
     var duration = const Duration(seconds: 2);
-     getData();
+    await  getData();
     return Timer(duration, handleTimeout);
   }
 
@@ -58,11 +58,11 @@ class _SplashScreenState extends State<SplashScreen> {
 getData() async {
     await getLocation();
     setData();
-    setState(() {
+    
       list.sort((a, b) => Comparable.compare(
           double.parse(a.distance), double.parse(b.distance)));
       isLoading = false;
-    });
+    
   }
   
 

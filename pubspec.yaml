@@ -39,10 +39,12 @@ dependencies:
   permission_handler: ^4.2.0
   android_intent: ^0.3.5+1
   store_redirect: ^1.0.2
+  scrollable_positioned_list: ^0.1.7
   geolocator: ^5.3.2+2
   biscuits: ^2.8.0
   cached_network_image: ^2.3.2+1
   google_maps_flutter: ^0.5.32
+  dropdown_search: ^0.4.8
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/model/locationitem.dart';
 import 'package:sarasotaapp/navigation.dart';
+import 'package:sarasotaapp/pages/FindADoctor/doctor_detail_view.dart';
 import 'package:sarasotaapp/pages/FindADoctor/doctorsearch.dart';
+import 'package:sarasotaapp/pages/FindADoctor/find_a_doctor.dart';
+import 'package:sarasotaapp/pages/FindADoctor/getSpecilties.dart';
 import 'package:sarasotaapp/pages/home_page/nearest_locations.dart';
 import 'package:sarasotaapp/pages/locations/locationdetails.dart';
 import 'package:sarasotaapp/pages/menu.dart';
@@ -115,7 +118,7 @@ class _HomeState extends State<Home> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return DoctorSearch();
+                                return GetSpecialties();
                               }),
                             );
                           }),
@@ -195,8 +198,8 @@ class _HomeState extends State<Home> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            NearestLocations(cardsData: widget.cardsData)));
+                                        builder: (context) => NearestLocations(
+                                            cardsData: widget.cardsData)));
                               },
                               child: Text(
                                 'SEE ALL',
@@ -213,22 +216,22 @@ class _HomeState extends State<Home> {
                                 children: [
                                   ...widget.cardsData.map(
                                     (e) => _buildListCard(
-                                        path: e.image, 
+                                        path: e.image,
                                         title: e.title,
                                         callBack: () {
-                                           Navigation.open(
-                    context,
-                    LocationDetails(
-                      info:  e,
-                      distance: e.distance != null
-                          ? '${e.distance} mi'
-                          : '',
-                      latitude: e.latitude,
-                      longitude: e.longitude,
-                      address: e.mapAddress,
-                      //address:list[i].address,
-                    ),
-                  );
+                                          Navigation.open(
+                                            context,
+                                            LocationDetails(
+                                              info: e,
+                                              distance: e.distance != null
+                                                  ? '${e.distance} mi'
+                                                  : '',
+                                              latitude: e.latitude,
+                                              longitude: e.longitude,
+                                              address: e.mapAddress,
+                                              //address:list[i].address,
+                                            ),
+                                          );
                                         }),
                                   )
                                 ]),
@@ -295,17 +298,17 @@ class _HomeState extends State<Home> {
           horizontal: 10,
         ),
         child: Container(
-               width: MediaQuery.of(context).size.width * .5,
+          width: MediaQuery.of(context).size.width * .5,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 clipBehavior: Clip.antiAlias,
-           
                 height: MediaQuery.of(context).size.height * .2,
                 decoration: BoxDecoration(
-                    color: Colors.amber, borderRadius: BorderRadius.circular(10)),
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(10)),
                 child: Image.asset(
                   path,
                   fit: BoxFit.cover,

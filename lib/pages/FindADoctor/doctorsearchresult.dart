@@ -1,37 +1,35 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/pages/FindADoctor/RequestAppointment.dart';
+import 'package:sarasotaapp/pages/FindADoctor/doctor_detail_view.dart';
 import 'package:sarasotaapp/pages/FindADoctor/doctordetail.dart';
 import 'package:sarasotaapp/pages/FindADoctor/strings.dart';
-import 'package:sarasotaapp/widgets/ualabel.dart';
 
 import '../../uatheme.dart';
 import 'Webservices.dart';
-import 'doctor.dart';
+import '../../model/doctor.dart';
 import 'helper.dart';
 
+// ignore: must_be_immutable
 class DoctorSearchResult extends StatefulWidget {
-  final bool isSecondarySearch;
-  final String name;
-  final String speciality;
-  final String zipCode;
-  final String keyword;
-  final bool showResultsAcceptingNewpatients;
-
-  DoctorSearchResult(this.isSecondarySearch, this.name, this.speciality,
-      this.zipCode, this.keyword, this.showResultsAcceptingNewpatients);
+  List<dynamic> specialties;
+  DoctorSearchResult({this.specialties});
 
   @override
   _DoctorSearchResultState createState() => _DoctorSearchResultState();
 }
 
 class _DoctorSearchResultState extends State<DoctorSearchResult> {
+  TextEditingController _nameController = new TextEditingController(text: '');
+  String _currentSelectedValue;
   List<Doctor> _searchResults = [];
-  bool _isLoading = true;
+  bool _isLoading = false;
   int _page = 1;
   int _totalResultCount = 0;
-  ScrollController _scrollController = ScrollController();
+  ScrollController _scrollController;
   bool _gettingMoreResults = false;
   int _sortBy = 0;
   bool creatingPDF = false;
@@ -43,8 +41,8 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
     super.initState();
 
     _checkDoctorLoggedInState();
-
-    _getSearchResults();
+    _scrollController = ScrollController();
+    // _getSearchResults();
 
     _scrollController.addListener(() {
       double maxScroll = _scrollController.position.maxScrollExtent;
@@ -62,25 +60,37 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   }
 
   _getSearchResults() async {
-    _isLoading = true;
-    final data = await WebServiceHelper.getDoctors(
-        isSecondarySearch: this.widget.isSecondarySearch,
-        name: this.widget.name,
-        speciality: this.widget.speciality,
-        zipCode: this.widget.zipCode,
-        keyword: this.widget.keyword,
-        acceptingNewPatientSwitchValue:
-            this.widget.showResultsAcceptingNewpatients,
-        page: _page,
-        sortBy: _sortBy);
+    if (_nameController.text != "") {
+      setState(() {
+        _totalResultCount = 0;
+        _page = 1;
+        _searchResults.clear();
+        _isLoading = true;
+      });
+      final data = await WebServiceHelper.getDoctors(
+          isSecondarySearch: false,
+          name: _nameController.text,
+          speciality: _currentSelectedValue,
+          zipCode: '',
+          keyword: '',
+          acceptingNewPatientSwitchValue: false,
+          page: _page,
+          sortBy: 0);
 
-    _page++;
+      _page++;
 
-    this.setState(() {
-      _totalResultCount = data.totalRecords;
-      _searchResults = data == null ? [] : data.list;
-      _isLoading = false;
-    });
+      setState(() {
+        _isLoading = false;
+        _totalResultCount = data.totalRecords;
+        _searchResults = data == null ? [] : data.list;
+      });
+    } else {
+      setState(() {
+        _page = 1;
+        _totalResultCount = 0;
+        _searchResults.clear();
+      });
+    }
   }
 
   _getMoreSearchResults() async {
@@ -97,15 +107,14 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
     });
 
     final data = await WebServiceHelper.getDoctors(
-        isSecondarySearch: this.widget.isSecondarySearch,
-        name: this.widget.name,
-        speciality: this.widget.speciality,
-        zipCode: this.widget.zipCode,
-        keyword: this.widget.keyword,
-        acceptingNewPatientSwitchValue:
-            this.widget.showResultsAcceptingNewpatients,
+        isSecondarySearch: false,
+        name: _nameController.text,
+        speciality: _currentSelectedValue,
+        zipCode: '',
+        keyword: '',
+        acceptingNewPatientSwitchValue: false,
         page: _page,
-        sortBy: _sortBy);
+        sortBy: 0);
 
     _page++;
 
@@ -118,117 +127,251 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: UALabel(
-          text: Strings.doctorSearchResultsTitle,
-          size: UATheme.headingSize(),
-        ),
-        actions: _totalResultCount <= 10
-            ? null
-            : <Widget>[
-                Container(
-                  margin: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: Color(0xffe8e8e8)),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(2)),
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(8),
-                  child: Center(
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        dropdownColor: Colors.white,
-                        value: _sortBy,
-                        items: [
-                          DropdownMenuItem(
-                              child: Text(Strings.sortBy), value: 0),
-                          DropdownMenuItem(
-                              child: Text(Strings.fullName), value: 1),
-                          DropdownMenuItem(
-                              child: Text(Strings.firstName), value: 2),
-                          DropdownMenuItem(
-                              child: Text(Strings.lastName), value: 3)
-                        ],
-                        onChanged: (int value) {
-                          this.setState(() {
-                            _sortBy = value;
-                          });
-                          if (value == 0) {
-                            return;
-                          }
-                          _page = 1;
+      body: Stack(
+        children: [
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.35,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              child: _isLoading
+                  ? Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : _searchResults.isEmpty
+                      ? Center(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.search,
+                                size: 100,
+                                color: UiColors.primaryColor,
+                              )))
+                      : ListView.builder(
+                          controller: _scrollController,
+                          padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
+                          itemCount: _searchResults.length +
+                              (_gettingMoreResults ? 1 : 0),
+                          itemBuilder: (BuildContext context, int position) {
+                            if (position < _searchResults.length) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 8),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.blueGrey.shade50,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: ListTile(
+                                    leading: Container(
+                                      width: 50,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(borderRadius:BorderRadius.circular(5) ),
+                                      child: Image.network(
+                                          _searchResults[position].image,fit: BoxFit.cover,
+                                          errorBuilder: (BuildContext context,
+                                              Object exception,
+                                              StackTrace stackTrace) {
+                                        return Text('Your error widget...');
+                                      }),
+                                    ),
+                                    title: Text(
+                                      _searchResults[position].fullName,
+                                    ),
+                                    subtitle: Text(
+                                      _searchResults[position].specialities,
+                                      maxLines: 2,
+                                    ),
+                                    trailing: InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) {
+                                            return DoctorDetailView(doctor:_searchResults[position]);
+                                          }),
+                                        );
+                                      },
+                                      child: Material(
+                                        borderRadius: BorderRadius.circular(7),
+                                        color: Theme.of(context).primaryColor,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('View Profile'),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          }),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: Container(
+                height: 300,
+                color: Theme.of(context).primaryColor,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 18, right: 18, bottom: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Icon(Icons.arrow_back_ios_outlined)),
+                      Text(
+                        'Search Doctor',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 3,
+                              width: 20,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 3,
+                              width: 25,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 3,
+                              width: 15,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )),
+          ),
+          Positioned(
+            left: 12,
+            right: 12,
+            height: MediaQuery.of(context).size.height * 0.22,
+            top: MediaQuery.of(context).size.height * 0.15,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text(
+                        'SEARCH',
+                        style: TextStyle(color: Colors.grey, fontSize: 11),
+                      ),
+                    ),
+                    Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.blueGrey.shade50,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: TextField(
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          hintText: 'Search doctor',
+                          filled: true,
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(
+                            top: 8, // HERE THE IMPORTANT PART
+                          ),
 
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10.7),
+                          ),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          //  prefixIcon: Icon(Icons.search,)
+                        ),
+                        onChanged: (value) {
                           _getSearchResults();
                         },
                       ),
                     ),
-                  ),
-                )
-              ],
-      ),
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : Container(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    child: new RichText(
-                      text: new TextSpan(
-                        children: [
-                          new TextSpan(
-                            text: Strings.notFound,
-                            style: new TextStyle(
-                                color: Colors.black54, fontSize: 16),
+                    Container(
+                      height: 55,
+                      child: DropdownSearch(
+                        mode: Mode.MENU,
+                        // labelStyle: TextStyle(
+                        //     color: Theme.of(context).textSelectionColor,
+                        //     fontWeight: FontWeight.w600,
+                        //     fontSize: 12),
+                        label: "Branches",
+                        selectedItem: _currentSelectedValue,
+
+                        items: [...widget.specialties.map((e) => e.toString())],
+                        onChanged: (value) async {
+                          _currentSelectedValue = value;
+                          setState(() {
+                            _getSearchResults();
+                          });
+                        },
+                        searchBoxDecoration: InputDecoration(
+                            suffix: Container(
+                          height: 30,
+                          child: FloatingActionButton(
+                            onPressed: () {},
+                            backgroundColor: Theme.of(context).accentColor,
+                            child: Icon(Icons.add),
                           ),
-                          new TextSpan(
-                            text: Strings.clickHere,
-                            style: new TextStyle(
-                                color: Colors.blue,
-                                decoration: TextDecoration.underline,
-                                fontSize: 16),
-                            recognizer: new TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pop(context, "secondarySearch");
-                              },
-                          ),
-                        ],
+                        )),
+                        // autofocus: true,
+                        // backgroundColor: Theme.of(context).cardColor,
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    child: _searchResults.isEmpty
-                        ? Center(
-                            child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              Strings.noSearchResult,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ))
-                        : ListView.builder(
-                            controller: _scrollController,
-                            padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
-                            itemCount: _searchResults.length +
-                                (_gettingMoreResults ? 1 : 0),
-                            itemBuilder: (BuildContext context, int position) {
-                              if (position < _searchResults.length) {
-                                return _buildRow(position);
-                              }
-                              return Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child:
-                                    Center(child: CircularProgressIndicator()),
-                              );
-                            }),
-                  ),
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
+          )
+        ],
+      ),
     );
   }
 

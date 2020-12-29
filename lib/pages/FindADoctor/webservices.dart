@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:sarasotaapp/model/doctor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'doctor.dart';
+ 
 
 class WebServiceConstants {
   static final baseURL =

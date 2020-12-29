@@ -246,23 +246,23 @@ class _DoctorSearchState extends State<DoctorSearch> {
   }
 
   _goToSearchResults() async {
-    final result = await Navigator.of(context).push(
-      new MaterialPageRoute(
-        builder: (BuildContext context) => new DoctorSearchResult(
-            _showSecondarySearch,
-            _nameController.text,
-            _currentSelectedValue,
-            _zipCodeController.text,
-            _keywordController.text,
-            _acceptingNewPatientSwitchValue),
-      ),
-    );
+    // final result = await Navigator.of(context).push(
+    //   new MaterialPageRoute(
+    //     builder: (BuildContext context) => new DoctorSearchResult(
+    //         _showSecondarySearch,
+    //         _nameController.text,
+    //         _currentSelectedValue,
+    //         _zipCodeController.text,
+    //         _keywordController.text,
+    //         _acceptingNewPatientSwitchValue),
+    //   ),
+    // );
 
-    if (result != null) {
-      this.setState(() {
-        this._showSecondarySearch = true;
-      });
-    }
+    // if (result != null) {
+    //   this.setState(() {
+    //     this._showSecondarySearch = true;
+    //   });
+    // }
 
     _nameController.clear();
     _zipCodeController.clear();
