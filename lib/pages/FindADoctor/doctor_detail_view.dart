@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sarasotaapp/model/doctor.dart';
+import 'package:sarasotaapp/pages/FindADoctor/helper.dart';
 
 class DoctorDetailView extends StatelessWidget {
   Doctor doctor;
@@ -80,7 +81,7 @@ class DoctorDetailView extends StatelessWidget {
                         Container(
                           child: Text(
                             doctor.fullName,
-                            style: TextStyle(fontSize: 36),
+                            style: TextStyle(fontSize: 26),
                           ),
                         ),
                         Padding(
@@ -132,7 +133,10 @@ class DoctorDetailView extends StatelessWidget {
                     child: Image.network(doctor.image, fit: BoxFit.cover,
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace stackTrace) {
-                      return Text('Your error widget...');
+                      return Icon(
+                        Icons.person,
+                        size: 100,
+                      );
                     }),
                   )
                 ],
@@ -174,6 +178,93 @@ class DoctorDetailView extends StatelessWidget {
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20)),
                       ),
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              doctor.address.street != null
+                                  ? getDoctorInformationTileTitle(
+                                      title: 'Address')
+                                  : Container(),
+                              doctor.address.street != null
+                                  ? Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
+                                      child: Text(
+                                          '${doctor.address.street} ${doctor.address.city} ${doctor.address.state} ${doctor.address.postalCode}',
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 18)),
+                                    )
+                                  : Container(),
+                              doctor.specialities != null
+                                  ? getDoctorInformationTileTitle(
+                                      title: 'Specialties')
+                                  : Container(),
+                              doctor.specialities != null
+                                  ? getDoctorInformationTileSubTitle(
+                                      subTitle: doctor.specialities)
+                                  : Container(),
+                              doctor.boardCertifications != null
+                                  ? getDoctorInformationTileTitle(
+                                      title: 'Board Certification')
+                                  : Container(),
+                              doctor.boardCertifications != null
+                                  ? getDoctorInformationTileSubTitle(
+                                      subTitle: doctor.boardCertifications)
+                                  : Container(),
+                              doctor.medicalSchools != null
+                                  ? getDoctorInformationTileTitle(
+                                      title: 'Medical School')
+                                  : Container(),
+                              doctor.medicalSchools != null
+                                  ? getDoctorInformationTileSubTitle(
+                                      subTitle: doctor.medicalSchools)
+                                  : Container(),
+                              doctor.internships != null
+                                  ? getDoctorInformationTileTitle(
+                                      title: 'Internship')
+                                  : Container(),
+                              doctor.internships != null
+                                  ? getDoctorInformationTileSubTitle(
+                                      subTitle: doctor.internships)
+                                  : Container(),
+                              doctor.residencies != null
+                                  ? getDoctorInformationTileTitle(
+                                      title: 'Residency')
+                                  : Container(),
+                              doctor.residencies != null
+                                  ? getDoctorInformationTileSubTitle(
+                                      subTitle: doctor.residencies)
+                                  : Container(),
+                              doctor.website != null
+                                  ? getDoctorInformationTileTitle(
+                                      title: 'Website')
+                                  : Container(),
+                              doctor.website != null
+                                  ? Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
+                                      child: InkWell(
+                                        onTap: () {
+                                            Helper.launchURL('https://${doctor.website}');
+                                        },
+                                        child: Text(doctor.website,
+                                            style: TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 18)),
+                                      ),
+                                    )
+                                  : Container(),
+                              SizedBox(
+                                height: 20,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   )
                 ],
@@ -181,5 +272,23 @@ class DoctorDetailView extends StatelessWidget {
             )),
           ],
         ));
+  }
+
+  getDoctorInformationTileTitle({String title}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Text(
+        title,
+        style: TextStyle(
+            color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  getDoctorInformationTileSubTitle({String subTitle}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(subTitle, style: TextStyle(color: Colors.grey, fontSize: 18)),
+    );
   }
 }

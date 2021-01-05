@@ -60,11 +60,9 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   }
 
   _getSearchResults() async {
-    if (_nameController.text != "") {
+     
       setState(() {
-        _totalResultCount = 0;
-        _page = 1;
-        _searchResults.clear();
+       
         _isLoading = true;
       });
       final data = await WebServiceHelper.getDoctors(
@@ -84,13 +82,8 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
         _totalResultCount = data.totalRecords;
         _searchResults = data == null ? [] : data.list;
       });
-    } else {
-      setState(() {
-        _page = 1;
-        _totalResultCount = 0;
-        _searchResults.clear();
-      });
-    }
+    
+    
   }
 
   _getMoreSearchResults() async {
@@ -173,7 +166,8 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                           errorBuilder: (BuildContext context,
                                               Object exception,
                                               StackTrace stackTrace) {
-                                        return Text('Your error widget...');
+                                        return Icon(Icons.person)
+                                        ;
                                       }),
                                     ),
                                     title: Text(
@@ -330,6 +324,9 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                           //  prefixIcon: Icon(Icons.search,)
                         ),
                         onChanged: (value) {
+                           _totalResultCount = 0;
+                           _page = 1;
+                           _searchResults.clear();
                           _getSearchResults();
                         },
                       ),
@@ -347,10 +344,12 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
 
                         items: [...widget.specialties.map((e) => e.toString())],
                         onChanged: (value) async {
-                          _currentSelectedValue = value;
-                          setState(() {
-                            _getSearchResults();
-                          });
+                           _totalResultCount = 0;
+                           _page = 1;
+                           _searchResults.clear();
+                           _currentSelectedValue = value;                       
+                           _getSearchResults();
+                          
                         },
                         searchBoxDecoration: InputDecoration(
                             suffix: Container(
