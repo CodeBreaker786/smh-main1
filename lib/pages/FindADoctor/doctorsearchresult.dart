@@ -39,7 +39,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   @override
   void initState() {
     super.initState();
-
+    widget.specialties.sort();
     _checkDoctorLoggedInState();
     _scrollController = ScrollController();
     // _getSearchResults();
@@ -60,30 +60,26 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   }
 
   _getSearchResults() async {
-     
-      setState(() {
-       
-        _isLoading = true;
-      });
-      final data = await WebServiceHelper.getDoctors(
-          isSecondarySearch: false,
-          name: _nameController.text,
-          speciality: _currentSelectedValue,
-          zipCode: '',
-          keyword: '',
-          acceptingNewPatientSwitchValue: false,
-          page: _page,
-          sortBy: 0);
+    setState(() {
+      _isLoading = true;
+    });
+    final data = await WebServiceHelper.getDoctors(
+        isSecondarySearch: false,
+        name: _nameController.text,
+        speciality: _currentSelectedValue,
+        zipCode: '',
+        keyword: '',
+        acceptingNewPatientSwitchValue: false,
+        page: _page,
+        sortBy: 0);
 
-      _page++;
+    _page++;
 
-      setState(() {
-        _isLoading = false;
-        _totalResultCount = data.totalRecords;
-        _searchResults = data == null ? [] : data.list;
-      });
-    
-    
+    setState(() {
+      _isLoading = false;
+      _totalResultCount = data.totalRecords;
+      _searchResults = data == null ? [] : data.list;
+    });
   }
 
   _getMoreSearchResults() async {
@@ -160,14 +156,16 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                     leading: Container(
                                       width: 50,
                                       clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(borderRadius:BorderRadius.circular(5) ),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
                                       child: Image.network(
-                                          _searchResults[position].image,fit: BoxFit.cover,
-                                          errorBuilder: (BuildContext context,
-                                              Object exception,
-                                              StackTrace stackTrace) {
-                                        return Icon(Icons.person)
-                                        ;
+                                          _searchResults[position].image,
+                                          fit: BoxFit.cover, errorBuilder:
+                                              (BuildContext context,
+                                                  Object exception,
+                                                  StackTrace stackTrace) {
+                                        return Icon(Icons.person);
                                       }),
                                     ),
                                     title: Text(
@@ -182,7 +180,9 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (BuildContext context) {
-                                            return DoctorDetailView(doctor:_searchResults[position]);
+                                            return DoctorDetailView(
+                                                doctor:
+                                                    _searchResults[position]);
                                           }),
                                         );
                                       },
@@ -324,9 +324,9 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                           //  prefixIcon: Icon(Icons.search,)
                         ),
                         onChanged: (value) {
-                           _totalResultCount = 0;
-                           _page = 1;
-                           _searchResults.clear();
+                          _totalResultCount = 0;
+                          _page = 1;
+                          _searchResults.clear();
                           _getSearchResults();
                         },
                       ),
@@ -341,15 +341,14 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                         //     fontSize: 12),
                         label: "Branches",
                         selectedItem: _currentSelectedValue,
-
+                         maxHeight: MediaQuery.of(context).size.height*0.6,
                         items: [...widget.specialties.map((e) => e.toString())],
                         onChanged: (value) async {
-                           _totalResultCount = 0;
-                           _page = 1;
-                           _searchResults.clear();
-                           _currentSelectedValue = value;                       
-                           _getSearchResults();
-                          
+                          _totalResultCount = 0;
+                          _page = 1;
+                          _searchResults.clear();
+                          _currentSelectedValue = value;
+                          _getSearchResults();
                         },
                         searchBoxDecoration: InputDecoration(
                             suffix: Container(
