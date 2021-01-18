@@ -19,7 +19,7 @@ class _SocialMediaState extends State<SocialMedia> {
           size: UATheme.headingSize(),
         ),
       ),
-      drawer: Menu(),
+      
       body: Column(
         children: <Widget>[
           ListTile(

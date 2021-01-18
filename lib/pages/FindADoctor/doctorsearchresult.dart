@@ -6,7 +6,9 @@ import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/pages/FindADoctor/RequestAppointment.dart';
 import 'package:sarasotaapp/pages/FindADoctor/doctor_detail_view.dart';
 import 'package:sarasotaapp/pages/FindADoctor/doctordetail.dart';
+import 'package:sarasotaapp/pages/FindADoctor/doctorlogin.dart';
 import 'package:sarasotaapp/pages/FindADoctor/strings.dart';
+import 'package:sarasotaapp/utils/show_flushbar.dart';
 
 import '../../uatheme.dart';
 import 'Webservices.dart';
@@ -35,6 +37,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   bool creatingPDF = false;
   bool _sendingCell = false;
   bool _isDoctorLoggedIn = false;
+  bool isLoginLoding = true;
 
   @override
   void initState() {
@@ -56,7 +59,12 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   }
 
   _checkDoctorLoggedInState() async {
-    _isDoctorLoggedIn = await FindDoctorPreferences.isDoctorLoggedIn();
+    await FindDoctorPreferences.isDoctorLoggedIn().then((e) {
+      setState(() {
+        isLoginLoding = false;
+        _isDoctorLoggedIn = e;
+      });
+    });
   }
 
   _getSearchResults() async {
@@ -122,7 +130,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
             top: MediaQuery.of(context).size.height * 0.35,
             left: 0,
             right: 0,
-            bottom: 0,
+            bottom: _isDoctorLoggedIn?0:70,
             child: Container(
               child: _isLoading
                   ? Padding(
@@ -182,7 +190,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                               builder: (BuildContext context) {
                                             return DoctorDetailView(
                                                 doctor:
-                                                    _searchResults[position]);
+                                                    _searchResults[position],isDoctorLogin: _isDoctorLoggedIn,);
                                           }),
                                         );
                                       },
@@ -226,43 +234,11 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                           },
                           child: Icon(Icons.arrow_back_ios_outlined)),
                       Text(
-                        'Search Doctor',
+                        'Find A Doctor or Provider',
                         style: TextStyle(fontSize: 18),
                       ),
                       Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              height: 3,
-                              width: 20,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              height: 3,
-                              width: 25,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              height: 3,
-                              width: 15,
-                            ),
-                          ],
-                        ),
+                        width: 35,
                       )
                     ],
                   ),
@@ -271,7 +247,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
           Positioned(
             left: 12,
             right: 12,
-            height: MediaQuery.of(context).size.height * 0.22,
+            height: MediaQuery.of(context).size.height * 0.19,
             top: MediaQuery.of(context).size.height * 0.15,
             child: Card(
               shape: RoundedRectangleBorder(
@@ -339,9 +315,9 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                         //     color: Theme.of(context).textSelectionColor,
                         //     fontWeight: FontWeight.w600,
                         //     fontSize: 12),
-                        label: "Branches",
+                        label: "Specialties",
                         selectedItem: _currentSelectedValue,
-                         maxHeight: MediaQuery.of(context).size.height*0.6,
+                        maxHeight: MediaQuery.of(context).size.height * 0.6,
                         items: [...widget.specialties.map((e) => e.toString())],
                         onChanged: (value) async {
                           _totalResultCount = 0;
@@ -370,6 +346,46 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
           )
         ],
       ),
+      bottomSheet: isLoginLoding
+          ? SizedBox()
+          : _isDoctorLoggedIn
+              ? SizedBox()
+              : Container(
+                  constraints: BoxConstraints.expand(height: 70),
+                  child: MaterialButton(
+                    onPressed: () async {
+                      bool islogin = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DoctorLogin()));
+                      if (islogin) {
+                        showSnackBar(
+                            context: context,
+                            value: "You Login Successfully",
+                            icon: Icon(Icons.login));
+                        setState(() {
+                          _isDoctorLoggedIn = true;
+                        });
+                      }
+                    },
+                    color: Theme.of(context).primaryColor,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Not Signed In',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                        Text(
+                          'Click to login',
+                          style: TextStyle(
+                            color: Colors.white60,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
     );
   }
 

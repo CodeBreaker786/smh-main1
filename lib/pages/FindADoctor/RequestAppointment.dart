@@ -1,7 +1,10 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/pages/FindADoctor/strings.dart';
 import 'package:sarasotaapp/pages/FindADoctor/webservices.dart';
+import 'package:sarasotaapp/utils/show_flushbar.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
 
 import '../../uatheme.dart';
@@ -195,9 +198,8 @@ class _RequestAppointmentState extends State<RequestAppointment> {
                   child: _sendingRequest
                       ? Center(child: CircularProgressIndicator())
                       : RaisedButton(
+                          color: UiColors.primaryColor,
                           onPressed: () async {
-                            FocusScope.of(context).unfocus();
-
                             if (_formKey.currentState.validate()) {
                               if (_nameController.text.isNotEmpty &&
                                   _emailController.text.isNotEmpty &&
@@ -225,7 +227,12 @@ class _RequestAppointmentState extends State<RequestAppointment> {
                                   _sendingRequest = false;
                                 });
                               } else {
-                                UATheme.alert(Strings.allFieldsAreMandatory);
+                                showSnackBar(
+                                  context: context,
+                                  isError: true,
+                                  icon: Icon(Icons.error),
+                                  value: Strings.allFieldsAreMandatory,
+                                );
                               }
                             }
                           },

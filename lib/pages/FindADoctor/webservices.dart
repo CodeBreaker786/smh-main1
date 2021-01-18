@@ -4,8 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:sarasotaapp/model/doctor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
- 
-
 class WebServiceConstants {
   static final baseURL =
       'https://yj1hczi4wj.execute-api.us-east-1.amazonaws.com/dev/doctor';
@@ -37,7 +35,7 @@ class WebServiceHelper {
       print(json.decode(response.body));
       var loginData = json.decode(response.body);
       if (loginData['body']['status']) {
-        FindDoctorPreferences.saveLoginData(loginData['body']['message']);
+        await FindDoctorPreferences.saveLoginData(loginData['body']['message']);
         return true;
       }
       return false;
@@ -92,7 +90,7 @@ class WebServiceHelper {
 
     var url =
         "${WebServiceConstants.baseURL}${isSecondarySearch ? WebServiceConstants.doctorSecondarySearchPath : WebServiceConstants.doctorPrimarySearchPath}?page=$page&sort=$sort";
-
+    print(url);
     if (name != null && name.isNotEmpty) {
       url = url + "&name=$name";
     }
@@ -136,20 +134,24 @@ class WebServiceHelper {
   }
 
   static sendCell(String id) async {
-    var token = await FindDoctorPreferences.getDoctorToken();
+    try {
+      var token = await FindDoctorPreferences.getDoctorToken();
 
-    final http.Response response = await http.post(
-      WebServiceConstants.baseURL + WebServiceConstants.sendCellPath,
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer ' + token
-      },
-      body: jsonEncode(<String, String>{'id': id}),
-    );
+      final http.Response response = await http.post(
+        WebServiceConstants.baseURL + WebServiceConstants.sendCellPath,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + token
+        },
+        body: jsonEncode(<String, String>{'id': id}),
+      );
 
-    if (response.statusCode == 200) {
-      return true;
-    } else {
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
       return false;
     }
   }

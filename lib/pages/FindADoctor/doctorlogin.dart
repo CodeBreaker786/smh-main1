@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/pages/FindADoctor/strings.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
 
@@ -29,6 +30,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
         body: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: _isLoading
                 ? CrossAxisAlignment.center
                 : CrossAxisAlignment.stretch,
@@ -38,6 +40,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
                   child: TextFormField(
                     controller: cellController,
                     decoration: const InputDecoration(
+                      labelText: 'Cell',
                       border: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Color(0xffe8e8e8), width: 2.0),
@@ -56,6 +59,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
                   child: TextFormField(
                     controller: dictationController,
                     decoration: const InputDecoration(
+                      labelText: 'Dictation',
                       border: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Color(0xffe8e8e8), width: 2.0),
@@ -75,8 +79,9 @@ class _DoctorLoginState extends State<DoctorLogin> {
                 child: _isLoading
                     ? CircularProgressIndicator()
                     : RaisedButton(
+                      color: UiColors.primaryColor,
                         onPressed: () async {
-                          FocusScope.of(context).unfocus();
+                          
 
                           if (_formKey.currentState.validate()) {
                             // Process data.
@@ -89,7 +94,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
                                     dictationController.text);
 
                             if (isLoginSuccessful) {
-                              Navigator.pop(context, "loggedIn");
+                              Navigator.pop(context,true);
                             } else {
                               UATheme.alert('Login parameters not correct');
                             }

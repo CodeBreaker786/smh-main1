@@ -1,17 +1,24 @@
+import 'dart:ffi';
+
+import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/model/locationitem.dart';
 import 'package:sarasotaapp/navigation.dart';
-import 'package:sarasotaapp/pages/FindADoctor/doctor_detail_view.dart';
-import 'package:sarasotaapp/pages/FindADoctor/doctorsearch.dart';
-import 'package:sarasotaapp/pages/FindADoctor/find_a_doctor.dart';
+
 import 'package:sarasotaapp/pages/FindADoctor/getSpecilties.dart';
+import 'package:sarasotaapp/pages/FindADoctor/helper.dart';
 import 'package:sarasotaapp/pages/home_page/nearest_locations.dart';
+import 'package:sarasotaapp/pages/home_page/see_all_icons_page.dart';
 import 'package:sarasotaapp/pages/locations/locationdetails.dart';
 import 'package:sarasotaapp/pages/menu.dart';
+import 'package:sarasotaapp/pages/privacypolicy.dart';
 import 'package:sarasotaapp/pages/services/ourservices.dart';
+
 import 'package:sarasotaapp/pages/surgerystatus.dart';
 import 'package:sarasotaapp/pages/symptom/step1.dart';
+import 'package:sarasotaapp/utils/navigation_style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   List<LocationItem> cardsData = List();
@@ -20,274 +27,314 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool seeAll = true;
+  FancyDrawerController _controller;
+ 
+  
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        FancyDrawerController(vsync: this, duration: Duration(milliseconds: 600))
+          ..addListener(() {
+            setState(() {});
+          });
+     
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Menu(),
       resizeToAvoidBottomPadding: false,
-      body: Container(
-          color: UiColors.primaryColor,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Builder(
-                          builder: (context) {
-                            return InkWell(
-                                onTap: () {
-                                  Scaffold.of(context).openDrawer();
-                                },
-                                child: Icon(Icons.menu));
-                          },
+      body: FancyDrawerWrapper(
+        backgroundColor: Colors.white10,
+        drawerItems: [
+          Container(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Menu(),
+
+                  // Container(
+
+                  //   alignment: Alignment.bottomLeft,
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //       _launchURL('https://smh.com');
+                  //     },
+                  //     child: Image.asset(
+                  //       'assets/images/smhblueicon.png',
+                  //       height: 150.0,
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              )),
+        ],
+        controller: _controller,
+        child: Container(
+            color: UiColors.primaryColor,
+            child: Stack(children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
                         ),
-                        Text(
-                          'Sarasota Memorial',
-                          style: TextStyle(fontSize: 18),
-                          // style: Theme.of(context).textTheme.bodyText1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.menu,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                _controller.toggle();
+                              },
+                            ),
+                            Text(
+                              'Sarasota Memorial',
+                              style: TextStyle(fontSize: 18),
+                              // style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            Container(
+                              width: 35,
+                            )
+                          ],
                         ),
-                        Container()
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(
-                          bottom: 6, // HERE THE IMPORTANT PART
-                        ),
-                        icon: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        //  prefixIcon: Icon(Icons.search,)
                       ),
                     ),
                   ),
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  'How may we help you?',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white),
-                ),
-                trailing: Text(
-                  'SEE ALL',
-                  style: TextStyle(color: Colors.white60, fontSize: 14),
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  margin: EdgeInsets.only(left: 14),
-                  height: MediaQuery.of(context).size.height * .25,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      _buildListTile(
-                          title: 'Find a Doctor',
-                          path: 'assets/images/main/find_a_doctor.png',
-                          callBack: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return GetSpecialties();
-                              }),
-                            );
-                          }),
-                      _buildListTile(
-                          title: 'Our Serives',
-                          path: 'assets/images/main/our_serives.png',
-                          callBack: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return OurServices();
-                              }),
-                            );
-                          }),
-                      _buildListTile(
-                          title: 'Symptom Checker',
-                          path: 'assets/images/main/sympton_checker.png',
-                          callBack: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return SymptomChecker();
-                              }),
-                            );
-                          }),
-                      _buildListTile(
-                          title: 'Surgery Status',
-                          path: 'assets/images/main/surgery_status.png',
-                          callBack: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return SurgeryStatus(
-                                  url: 'https://surgerystatus.smh.com',
-                                );
-                              }),
-                            );
-                          }),
-                      _buildListTile(
-                          title: 'Find a Doctor',
-                          path: 'assets/images/main/find_a_doctor.png'),
-                      _buildListTile(
-                          title: 'Find a Doctor',
-                          path: 'assets/images/main/find_a_doctor.png'),
-                      _buildListTile(
-                          title: 'Find a Doctor',
-                          path: 'assets/images/main/find_a_doctor.png'),
-                      _buildListTile(
-                          title: 'Find a Doctor',
-                          path: 'assets/images/main/find_a_doctor.png'),
-                      _buildListTile(
-                          title: 'Find a Doctor',
-                          path: 'assets/images/main/find_a_doctor.png'),
-                      _buildListTile(
-                          title: 'Find a Doctor',
-                          path: 'assets/images/main/find_a_doctor.png'),
-                    ],
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.only(
+                              bottom: 6, // HERE THE IMPORTANT PART
+                            ),
+                            icon: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Icon(
+                                Icons.search,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            //  prefixIcon: Icon(Icons.search,)
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Expanded(
-                  flex: 4,
-                  child: Container(
-                      color: Colors.white,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ListTile(
-                            title: Text(
-                              'Nearest Locations',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                            ),
-                            trailing: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
+                  ListTile(
+                    title: Text(
+                      'How may we help you?',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                    trailing: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            SizeRoute(
+                               page:MainIcons(
+                                    )));
+                      },
+                      child: Text(
+                        'SEE ALL',
+                        style: TextStyle(color: Colors.white60, fontSize: 14),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Stack(children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 14),
+                        height: MediaQuery.of(context).size.height * .25,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            buildListTile(
+                                title: 'Find a Doctor',
+                                path: 'assets/images/main/find_a_doctor.png',
+                                callBack: () {
+                                  Navigator.of(context).push(
+                                    SlideRightRoute(
+                                        page: GetSpecialties(),
+                                    ),
+                                  );
+                                }),
+                            buildListTile(
+                                title: 'Our Serives',
+                                path: 'assets/images/main/our_serives.png',
+                                callBack: () {
+                                  Navigator.of(context).push(
                                     MaterialPageRoute(
-                                        builder: (context) => NearestLocations(
-                                            cardsData: widget.cardsData)));
-                              },
-                              child: Text(
-                                'SEE ALL',
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 14),
+                                        builder: (BuildContext context) {
+                                      return OurServices();
+                                    }),
+                                  );
+                                }),
+                            buildListTile(
+                                title: 'Symptom Checker',
+                                path: 'assets/images/main/sympton_checker.png',
+                                callBack: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                      return SymptomChecker();
+                                    }),
+                                  );
+                                }),
+                            buildListTile(
+                                title: 'Surgery Status',
+                                path: 'assets/images/main/surgery_status.png',
+                                callBack: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                      return SurgeryStatus(
+                                        url: 'https://surgerystatus.smh.com',
+                                      );
+                                    }),
+                                  );
+                                }),
+                            buildListTile(
+                               title: 'Find a Doctor',
+                               path: 'assets/images/main/find_a_doctor.png'),
+                            buildListTile(
+                               title: 'Find a Doctor',
+                               path: 'assets/images/main/find_a_doctor.png'),
+                            buildListTile(
+                               title: 'Find a Doctor',
+                               path: 'assets/images/main/find_a_doctor.png'),
+                            buildListTile(
+                               title: 'Find a Doctor',
+                               path: 'assets/images/main/find_a_doctor.png'),
+                            buildListTile(
+                               title: 'Find a Doctor',
+                               path: 'assets/images/main/find_a_doctor.png'),
+                            buildListTile(
+                                title: 'Find a Doctor',
+                                path: 'assets/images/main/find_a_doctor.png'),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ),
+                  Expanded(
+                      flex: 4,
+                      child: Container(
+                          color: Colors.white,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ListTile(
+                                title: Text(
+                                  'Nearest Locations',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                trailing: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        ScaleRoute(
+                                             page:
+                                                NearestLocations(
+                                                    cardsData:
+                                                        widget.cardsData)));
+                                  },
+                                  child: Text(
+                                    'SEE ALL',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 14),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 14),
-                            height: MediaQuery.of(context).size.height * .33,
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  ...widget.cardsData.map(
-                                    (e) => _buildListCard(
-                                        path: e.image,
-                                        title: e.title,
-                                        callBack: () {
-                                          Navigation.open(
-                                            context,
-                                            LocationDetails(
-                                              info: e,
-                                              distance: e.distance != null
-                                                  ? '${e.distance} mi'
-                                                  : '',
-                                              latitude: e.latitude,
-                                              longitude: e.longitude,
-                                              address: e.mapAddress,
-                                              //address:list[i].address,
-                                            ),
-                                          );
-                                        }),
-                                  )
-                                ]),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.only(bottom: 10),
-                              alignment: Alignment.center,
-                              child: Text(
-                                'smh',
-                                style: TextStyle(
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.bold,
-                                    color: UiColors.primaryColor),
+                              Container(
+                                margin: EdgeInsets.only(left: 14),
+                                height:
+                                    MediaQuery.of(context).size.height * .33,
+                                child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      ...widget.cardsData.map(
+                                        (e) => _buildListCard(
+                                            path: e.image,
+                                            title: e.title,
+                                            callBack: () {
+                                              Navigation.open(
+                                                context,
+                                                LocationDetails(
+                                                  info: e,
+                                                  distance: e.distance != null
+                                                      ? '${e.distance} mi'
+                                                      : '',
+                                                  latitude: e.latitude,
+                                                  longitude: e.longitude,
+                                                  address: e.mapAddress,
+                                                  //address:list[i].address,
+                                                ),
+                                              );
+                                            }),
+                                      )
+                                    ]),
                               ),
-                            ),
-                          ),
-                        ],
-                      ))),
-            ],
-          )),
-    );
-  }
-
-  _buildListTile({String title, String path, Function callBack}) {
-    return InkWell(
-      onTap: callBack,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        width: 80,
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: Colors.white),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Image.asset(path),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  alignment: Alignment.center,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Helper.launchURL('https://www.smh.com');
+                                    },
+                                    child: Text(
+                                      'smh',
+                                      style: TextStyle(
+                                          fontSize: 60,
+                                          fontWeight: FontWeight.bold,
+                                          color: UiColors.primaryColor),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ))),
+                ],
               ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Flexible(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ],
-        ),
+            ])),
       ),
     );
   }
 
+  
   _buildListCard({String title, String path, Function callBack}) {
     return InkWell(
       onTap: () {
@@ -343,7 +390,65 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  Text getTileText(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 16,
+        color: Colors.grey.shade700,
+      ),
+    );
+  }
+
+  line() {
+    return Divider();
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url, enableJavaScript: true, forceSafariVC: false);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
+buildListTile({String title, String path, Function callBack,bool padding=false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      width: 80,
+      
+      child: Column(
+        children: [
+          Expanded(
+            child: InkWell(
+              onTap: callBack,
+              child: Container(
+             
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.white),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding:   EdgeInsets.all(padding?20.0:0),
+                  child: Image.asset(path),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Flexible(
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
