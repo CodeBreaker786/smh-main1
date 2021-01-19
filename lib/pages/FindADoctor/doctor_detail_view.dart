@@ -1,11 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:sarasotaapp/appsettings.dart';
 import 'package:sarasotaapp/model/doctor.dart';
 import 'package:sarasotaapp/pages/FindADoctor/RequestAppointment.dart';
 import 'package:sarasotaapp/pages/FindADoctor/helper.dart';
-import 'package:sarasotaapp/pages/FindADoctor/strings.dart';
 import 'package:sarasotaapp/pages/FindADoctor/webservices.dart';
 import 'package:sarasotaapp/utils/customLoader.dart';
 import 'package:sarasotaapp/utils/show_flushbar.dart';
@@ -37,6 +34,7 @@ class _DoctorDetailViewState extends State<DoctorDetailView> {
         backgroundColor: Theme.of(context).primaryColor,
         body: Stack(children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                   margin: EdgeInsets.symmetric(vertical: 50),
@@ -65,129 +63,133 @@ class _DoctorDetailViewState extends State<DoctorDetailView> {
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: Text(
-                              widget.doctor.fullName,
-                              style: TextStyle(fontSize: 26),
-                            ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Text(
+                            widget.doctor.fullName,
+                            style: TextStyle(fontSize: 26),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 18),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                widget.isDoctorLogin
-                                    ? MaterialButton(
-                                        height: 40,
-                                        minWidth: 0,
-                                        elevation: 0,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(7)),
-                                        onPressed: () async {
-                                          await Helper.launchURL(
-                                              'tel://${widget.doctor.mobilePhone.replaceAll(RegExp(r'[^0-9]'), '')}');
-                                        },
-                                        color: Colors.white,
-                                        child: Icon(
-                                          Icons.phone_android_outlined,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                      )
-                                    : SizedBox(),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: MaterialButton(
-                                    height: 40,
-                                    minWidth: 0,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(7)),
-                                    onPressed: () async {
-                                      await Helper.launchURL(
-                                          'tel://${widget.doctor.phone.replaceAll(RegExp(r'[^0-9]'), '')}');
-                                    },
-                                    color: Colors.white,
-                                    child: Icon(
-                                      Icons.call,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: MaterialButton(
+                                  height: 40,
+                                  minWidth: 0,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(7)),
+                                  onPressed: () async {
+                                    await Helper.launchURL(
+                                        'tel://${widget.doctor.phone.replaceAll(RegExp(r'[^0-9]'), '')}');
+                                  },
+                                  color: Colors.white,
+                                  child: Icon(
+                                    Icons.call,
+                                    color: Theme.of(context).primaryColor,
                                   ),
                                 ),
-                                widget.isDoctorLogin
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(left: 8),
-                                        child: MaterialButton(
-                                            height: 40,
-                                            minWidth: 0,
-                                            elevation: 0,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7)),
-                                            onPressed: () async {
-                                              customLoader.showLoader(context);
-                                              bool isSuccessfull =
-                                                  await WebServiceHelper
-                                                      .sendCell(
-                                                          widget.doctor.id);
-                                              if (isSuccessfull) {
-                                                customLoader.hideLoader();
-                                                showSnackBar(
-                                                    context: context,
-                                                    value:
-                                                        'Cell is Sent Successfully',
-                                                    icon: Icon(Icons.check));
-                                              } else {
-                                                customLoader.hideLoader();
-                                                showSnackBar(
-                                                    context: context,
-                                                    isError: true,
-                                                    value:
-                                                        'Something go wrong please try again',
-                                                    icon: Icon(Icons.error));
-                                              }
-                                            },
-                                            color: Colors.white,
-                                            child: Text('Send Cell')),
-                                      )
-                                    : SizedBox(),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                              ),
+                              widget.isDoctorLogin
+                                  ? MaterialButton(
+                                      height: 40,
+                                      minWidth: 0,
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7)),
+                                      onPressed: () async {
+                                        await Helper.launchURL(
+                                            'tel://${widget.doctor.mobilePhone.replaceAll(RegExp(r'[^0-9]'), '')}');
+                                      },
+                                      color: Colors.white,
+                                      child: Icon(
+                                        Icons.phone_android_outlined,
+                                        color: Colors.green,
+                                      ),
+                                    )
+                                  : SizedBox(),
+                              widget.isDoctorLogin
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(left: 8),
+                                      child: MaterialButton(
+                                          height: 40,
+                                          minWidth: 0,
+                                          elevation: 3,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7)),
+                                          onPressed: () async {
+                                            customLoader.showLoader(context);
+                                            bool isSuccessfull =
+                                                await WebServiceHelper
+                                                    .sendCell(
+                                                        widget.doctor.id);
+                                            if (isSuccessfull) {
+                                              customLoader.hideLoader();
+                                              showSnackBar(
+                                                  context: context,
+                                                  value:
+                                                      'Cell is Sent Successfully',
+                                                  icon: Icon(Icons.check));
+                                            } else {
+                                              customLoader.hideLoader();
+                                              showSnackBar(
+                                                  context: context,
+                                                  isError: true,
+                                                  value:
+                                                      'Something go wrong please try again',
+                                                  icon: Icon(Icons.error));
+                                            }
+                                          },
+                                          color: Colors.green,
+                                          child: Text(
+                                            'Send Cell',
+                                            style: TextStyle(
+                                                color: Colors.white),
+                                          )),
+                                    )
+                                  : SizedBox(),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                     SizedBox(
                       width: 30,
                     ),
-                    Container(
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                          color: Colors.white60,
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 150,
-                      width: 120,
-                      child:
-                          Image.network(widget.doctor.image, fit: BoxFit.cover,
-                              errorBuilder: (BuildContext context,
-                                  Object exception, StackTrace stackTrace) {
-                        return Icon(
-                          Icons.person,
-                          size: 100,
-                        );
-                      }),
+                    Expanded(
+                      child: Container(
+                        constraints: BoxConstraints(minHeight: 150,minWidth: 50,maxWidth: 120),
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                            color: Colors.white60,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Image.network(widget.doctor.image,
+                            fit: BoxFit.cover, errorBuilder:
+                                (BuildContext context, Object exception,
+                                    StackTrace stackTrace) {
+                          return Icon(
+                            Icons.person,
+                            size: 100,
+                          );
+                        }),
+                      ),
                     )
                   ],
                 ),
               ),
               Expanded(
+                
                   child: Container(
                 margin: EdgeInsets.only(top: 20),
                 decoration: BoxDecoration(

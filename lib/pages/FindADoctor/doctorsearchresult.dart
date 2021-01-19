@@ -8,6 +8,7 @@ import 'package:sarasotaapp/pages/FindADoctor/doctor_detail_view.dart';
 import 'package:sarasotaapp/pages/FindADoctor/doctordetail.dart';
 import 'package:sarasotaapp/pages/FindADoctor/doctorlogin.dart';
 import 'package:sarasotaapp/pages/FindADoctor/strings.dart';
+import 'package:sarasotaapp/utils/customLoader.dart';
 import 'package:sarasotaapp/utils/show_flushbar.dart';
 
 import '../../uatheme.dart';
@@ -28,6 +29,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   TextEditingController _nameController = new TextEditingController(text: '');
   String _currentSelectedValue;
   List<Doctor> _searchResults = [];
+  CustomLoader customLoader;
   bool _isLoading = false;
   int _page = 1;
   int _totalResultCount = 0;
@@ -42,6 +44,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
   @override
   void initState() {
     super.initState();
+    customLoader = CustomLoader();
     widget.specialties.sort();
     _checkDoctorLoggedInState();
     _scrollController = ScrollController();
@@ -130,7 +133,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
             top: MediaQuery.of(context).size.height * 0.35,
             left: 0,
             right: 0,
-            bottom: _isDoctorLoggedIn?0:70,
+            bottom: _isDoctorLoggedIn ? 0 : 70,
             child: Container(
               child: _isLoading
                   ? Padding(
@@ -156,53 +159,164 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 25, vertical: 8),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.blueGrey.shade50,
+                                child: Card(
+                                  clipBehavior: Clip.antiAlias,
+                                  color: Colors.blue.shade100,
+                                  shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
-                                  child: ListTile(
-                                    leading: Container(
-                                      width: 50,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: Image.network(
-                                          _searchResults[position].image,
-                                          fit: BoxFit.cover, errorBuilder:
-                                              (BuildContext context,
-                                                  Object exception,
-                                                  StackTrace stackTrace) {
-                                        return Icon(Icons.person);
-                                      }),
-                                    ),
-                                    title: Text(
-                                      _searchResults[position].fullName,
-                                    ),
-                                    subtitle: Text(
-                                      _searchResults[position].specialities,
-                                      maxLines: 2,
-                                    ),
-                                    trailing: InkWell(
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) {
-                                            return DoctorDetailView(
-                                                doctor:
-                                                    _searchResults[position],isDoctorLogin: _isDoctorLoggedIn,);
-                                          }),
-                                        );
-                                      },
-                                      child: Material(
-                                        borderRadius: BorderRadius.circular(7),
-                                        color: Theme.of(context).primaryColor,
+                                  child: Container(
+                                    decoration: BoxDecoration(),
+                                    height: 100,
+                                    child: Row(children: [
+                                      Container(
+                                        width: 100,
+                                        height: 100,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: Image.network(
+                                            _searchResults[position].image,
+                                            fit: BoxFit.cover, errorBuilder:
+                                                (BuildContext context,
+                                                    Object exception,
+                                                    StackTrace stackTrace) {
+                                          return Icon(Icons.person);
+                                        }),
+                                      ),
+                                      Expanded(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Text('View Profile'),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                child: Text(
+                                                  _searchResults[position]
+                                                      .fullName,
+                                                  maxLines: 4,
+                                                  softWrap: true,
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                              ),
+                                              Flexible(
+                                                child: Text(
+                                                  _searchResults[position]
+                                                      .specialities,
+                                                  maxLines: 4,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                      Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8),
+                                          child: Column(
+                                            
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(builder:
+                                                        (BuildContext context) {
+                                                      return DoctorDetailView(
+                                                        doctor: _searchResults[
+                                                            position],
+                                                        isDoctorLogin:
+                                                            _isDoctorLoggedIn,
+                                                      );
+                                                    }),
+                                                  );
+                                                },
+                                                child: Material(
+                                                  elevation: 1.5,
+                                                  borderRadius:
+                                                      BorderRadius.circular(7),
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text('View Profile'),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(height: 8,),
+                                              _isDoctorLoggedIn
+                                                  ? InkWell(
+                                                      onTap: () async {
+                                                        customLoader.showLoader(
+                                                            context);
+                                                        bool isSuccessfull =
+                                                            await WebServiceHelper
+                                                                .sendCell(
+                                                                    _searchResults[
+                                                                            position]
+                                                                        .id);
+                                                        if (isSuccessfull) {
+                                                          customLoader
+                                                              .hideLoader();
+                                                          showSnackBar(
+                                                              context: context,
+                                                              value:
+                                                                  'Cell is Sent Successfully',
+                                                              icon: Icon(
+                                                                  Icons.check));
+                                                        } else {
+                                                          customLoader
+                                                              .hideLoader();
+                                                          showSnackBar(
+                                                              context: context,
+                                                              isError: true,
+                                                              value:
+                                                                  'Something go wrong please try again',
+                                                              icon: Icon(
+                                                                  Icons.error));
+                                                        }
+                                                      },
+                                                      child: Container(
+                                                        width: 93,
+                                                        child: Material(
+                                                              //  padding: EdgeInsets.symmetric(vertical: 12),
+
+                                                              elevation: 3,
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              7)),
+                                                              color: Colors.green,
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.all(8.0),
+                                                                child: Text(
+                                                                  'Send Cell',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                              )),
+                                                      ),
+                                                    )
+                                                  : SizedBox(),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
                                   ),
                                 ),
                               );
