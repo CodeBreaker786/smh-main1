@@ -30,17 +30,15 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool seeAll = true;
   FancyDrawerController _controller;
- 
-  
+
   @override
   void initState() {
     super.initState();
-    _controller =
-        FancyDrawerController(vsync: this, duration: Duration(milliseconds: 600))
-          ..addListener(() {
-            setState(() {});
-          });
-     
+    _controller = FancyDrawerController(
+        vsync: this, duration: Duration(milliseconds: 600))
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   @override
@@ -157,11 +155,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                     trailing: InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            SizeRoute(
-                               page:MainIcons(
-                                    )));
+                        Navigator.push(context, SizeRoute(page: MainIcons()));
                       },
                       child: Text(
                         'SEE ALL',
@@ -184,7 +178,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 callBack: () {
                                   Navigator.of(context).push(
                                     SlideRightRoute(
-                                        page: GetSpecialties(),
+                                      page: GetSpecialties(),
                                     ),
                                   );
                                 }),
@@ -223,24 +217,24 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     }),
                                   );
                                 }),
-                            buildListTile(
-                               title: 'Find a Doctor',
-                               path: 'assets/images/main/find_a_doctor.png'),
-                            buildListTile(
-                               title: 'Find a Doctor',
-                               path: 'assets/images/main/find_a_doctor.png'),
-                            buildListTile(
-                               title: 'Find a Doctor',
-                               path: 'assets/images/main/find_a_doctor.png'),
-                            buildListTile(
-                               title: 'Find a Doctor',
-                               path: 'assets/images/main/find_a_doctor.png'),
-                            buildListTile(
-                               title: 'Find a Doctor',
-                               path: 'assets/images/main/find_a_doctor.png'),
-                            buildListTile(
-                                title: 'Find a Doctor',
-                                path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //     title: 'Find a Doctor',
+                            //     path: 'assets/images/main/find_a_doctor.png'),
                           ],
                         ),
                       ),
@@ -266,10 +260,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     Navigator.push(
                                         context,
                                         ScaleRoute(
-                                             page:
-                                                NearestLocations(
-                                                    cardsData:
-                                                        widget.cardsData)));
+                                            page: NearestLocations(
+                                                cardsData: widget.cardsData)));
                                   },
                                   child: Text(
                                     'SEE ALL',
@@ -334,7 +326,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
-  
   _buildListCard({String title, String path, Function callBack}) {
     return InkWell(
       onTap: () {
@@ -413,42 +404,42 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     }
   }
 }
-buildListTile({String title, String path, Function callBack,bool padding=false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      width: 80,
-      
-      child: Column(
-        children: [
-          Expanded(
-            child: InkWell(
-              onTap: callBack,
-              child: Container(
-             
-                decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: Colors.white),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Padding(
-                  padding:   EdgeInsets.all(padding?20.0:0),
-                  child: Image.asset(path),
-                ),
+
+buildListTile(
+    {String title, String path, Function callBack, bool padding = false}) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 10),
+    width: 80,
+    child: Column(
+      children: [
+        Expanded(
+          child: InkWell(
+            onTap: callBack,
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Colors.white),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: EdgeInsets.all(padding ? 20.0 : 0),
+                child: Image.asset(path),
               ),
             ),
           ),
-          SizedBox(
-            height: 8,
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        Flexible(
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16),
           ),
-          Flexible(
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';

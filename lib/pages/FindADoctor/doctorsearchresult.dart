@@ -130,7 +130,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
       body: Stack(
         children: [
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.35,
+            top: MediaQuery.of(context).size.height * 0.30,
             left: 0,
             right: 0,
             bottom: _isDoctorLoggedIn ? 0 : 70,
@@ -161,7 +161,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                     horizontal: 25, vertical: 8),
                                 child: Card(
                                   clipBehavior: Clip.antiAlias,
-                                  color: Colors.blue.shade100,
+                                   color: Theme.of(context).primaryColor,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Container(
@@ -245,8 +245,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                   elevation: 1.5,
                                                   borderRadius:
                                                       BorderRadius.circular(7),
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
+                                                  color: Colors.blue.shade400,
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.all(
@@ -361,7 +360,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
           Positioned(
             left: 12,
             right: 12,
-            height: MediaQuery.of(context).size.height * 0.19,
+            height:150,
             top: MediaQuery.of(context).size.height * 0.15,
             child: Card(
               shape: RoundedRectangleBorder(
