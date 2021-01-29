@@ -52,6 +52,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: FancyDrawerWrapper(
+        hideOnContentTap: true,
         backgroundColor: Colors.white10,
         drawerItems: [
           Container(
@@ -61,20 +62,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Menu(),
-
-                  // Container(
-
-                  //   alignment: Alignment.bottomLeft,
-                  //   child: InkWell(
-                  //     onTap: () {
-                  //       _launchURL('https://smh.com');
-                  //     },
-                  //     child: Image.asset(
-                  //       'assets/images/smhblueicon.png',
-                  //       height: 150.0,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               )),
         ],

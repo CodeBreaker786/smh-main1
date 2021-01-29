@@ -161,7 +161,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                     horizontal: 25, vertical: 8),
                                 child: Card(
                                   clipBehavior: Clip.antiAlias,
-                                   color: Theme.of(context).primaryColor,
+                                  color: Theme.of(context).primaryColor,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Container(
@@ -221,7 +221,6 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8),
                                           child: Column(
-                                            
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             crossAxisAlignment:
@@ -254,7 +253,9 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(height: 8,),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
                                               _isDoctorLoggedIn
                                                   ? InkWell(
                                                       onTap: () async {
@@ -290,24 +291,26 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                       child: Container(
                                                         width: 93,
                                                         child: Material(
-                                                              //  padding: EdgeInsets.symmetric(vertical: 12),
+                                                            //  padding: EdgeInsets.symmetric(vertical: 12),
 
-                                                              elevation: 3,
-                                                              shape: RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              7)),
-                                                              color: Colors.green,
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.all(8.0),
-                                                                child: Text(
-                                                                  'Send Cell',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white),
-                                                                ),
-                                                              )),
+                                                            elevation: 3,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            7)),
+                                                            color: Colors.green,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Text(
+                                                                'Send Cell',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              ),
+                                                            )),
                                                       ),
                                                     )
                                                   : SizedBox(),
@@ -360,7 +363,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
           Positioned(
             left: 12,
             right: 12,
-            height:150,
+            height: 150,
             top: MediaQuery.of(context).size.height * 0.15,
             child: Card(
               shape: RoundedRectangleBorder(

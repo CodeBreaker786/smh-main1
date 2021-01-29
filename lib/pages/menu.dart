@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sarasotaapp/colors.dart';
+import 'package:sarasotaapp/pages/home_page/apps.dart';
 
 import 'package:sarasotaapp/pages/privacypolicy.dart';
 
@@ -24,7 +25,7 @@ class Menu extends StatelessWidget {
         getTileText(
           'Patient Portal',
           () {
-            _launchURL.call('tel://9419179000');
+            _launchURL('https://smh.followmyhealth.com/Login/Home/Index?authproviders=0&returnArea=PatientAccess#!/default');
           },
           Icons.dashboard,
         ),
@@ -32,7 +33,7 @@ class Menu extends StatelessWidget {
          getTileText(
           'Careers',
           () {
-            _launchURL.call('tel://9419179000');
+            _launchURL.call('https://careers.smh.com/careers/');
           },
           Icons.next_plan,
         ),
@@ -40,7 +41,7 @@ class Menu extends StatelessWidget {
         getTileText(
           'Bill Pay',
           () {
-            _launchURL.call('tel://9419179000');
+            _launchURL.call('https://smh.ci.healthpay24.cloud/');
           },
           Icons.payment,
         ),
@@ -48,7 +49,11 @@ class Menu extends StatelessWidget {
         getTileText(
           'Social Media',
           () {
-            _launchURL.call('tel://9419179000');
+          Navigator.of(context).push(
+              new MaterialPageRoute(
+                builder: (BuildContext context) =>  Apps()
+              ),
+            );
           },
           Icons.open_in_browser_outlined,
         ),
