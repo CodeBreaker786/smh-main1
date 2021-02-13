@@ -1,27 +1,22 @@
-import 'dart:ffi';
-
 import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/model/locationitem.dart';
 import 'package:sarasotaapp/navigation.dart';
-
 import 'package:sarasotaapp/pages/FindADoctor/getSpecilties.dart';
 import 'package:sarasotaapp/pages/FindADoctor/helper.dart';
 import 'package:sarasotaapp/pages/home_page/nearest_locations.dart';
 import 'package:sarasotaapp/pages/home_page/see_all_icons_page.dart';
 import 'package:sarasotaapp/pages/locations/locationdetails.dart';
-import 'package:sarasotaapp/pages/menu.dart';
-import 'package:sarasotaapp/pages/privacypolicy.dart';
+import 'package:sarasotaapp/pages/home_page/menu.dart';
 import 'package:sarasotaapp/pages/services/ourservices.dart';
-
 import 'package:sarasotaapp/pages/surgerystatus.dart';
 import 'package:sarasotaapp/pages/symptom/step1.dart';
 import 'package:sarasotaapp/utils/navigation_style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
-  List<LocationItem> cardsData = List();
+  List<LocationItem> cardsData = [];
   Home({this.cardsData});
   @override
   _HomeState createState() => _HomeState();
@@ -50,7 +45,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
       body: FancyDrawerWrapper(
         hideOnContentTap: true,
         backgroundColor: Colors.white10,

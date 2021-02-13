@@ -16,7 +16,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-   List<LocationItem> list = new List();
+   List<LocationItem> list = [];
   double latitude;
   double longitude;
   bool isLoading = true;
