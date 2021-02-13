@@ -158,21 +158,22 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                             if (position < _searchResults.length) {
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 25, vertical: 8),
+                                    horizontal: 25, vertical: 5),
                                 child: Card(
-                                  clipBehavior: Clip.antiAlias,
-                                  color: Theme.of(context).primaryColor,
+                                
+                                  //clipBehavior: Clip.antiAlias,
+                                  color: Theme.of(context).primaryColor.withOpacity(.6),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Container(
-                                    decoration: BoxDecoration(),
-                                    height: 100,
+                                     color: Colors.transparent,
+                                    height: 110,
                                     child: Row(children: [
                                       Container(
-                                        width: 100,
-                                        height: 100,
+                                        width: 80,
                                         clipBehavior: Clip.antiAlias,
                                         decoration: BoxDecoration(
+                                            color: Colors.transparent,
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         child: Image.network(
@@ -186,37 +187,31 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                       ),
                                       Expanded(
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                child: Text(
-                                                  _searchResults[position]
-                                                      .fullName,
-                                                  maxLines: 4,
-                                                  softWrap: true,
-                                                  style:
-                                                      TextStyle(fontSize: 20),
-                                                ),
+                                          padding: const EdgeInsets.symmetric(vertical: 5),
+                                          child: ListTile(
+                                            title:   Text(
+                                              _searchResults[position]
+                                                  .fullName,
+                                             
+                                              
+                                              style:
+                                                  TextStyle(fontSize: 17,color: Colors.white),
+                                            ),
+                                            subtitle: 
+                                              Text(
+                                                _searchResults[position]
+                                                    .specialities,
+                                                maxLines: 3,
+                                                overflow:
+                                                    TextOverflow.ellipsis,
+                                                     style:
+                                                  TextStyle( color: Colors.white70),
                                               ),
-                                              Flexible(
-                                                child: Text(
-                                                  _searchResults[position]
-                                                      .specialities,
-                                                  maxLines: 4,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ),
-                                            ],
                                           ),
                                         ),
                                       ),
                                       Container(
+                                         
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8),
@@ -244,7 +239,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                   elevation: 1.5,
                                                   borderRadius:
                                                       BorderRadius.circular(7),
-                                                  color: Colors.blue.shade400,
+                                                  color: Colors.blue ,
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.all(
@@ -289,21 +284,22 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                         }
                                                       },
                                                       child: Container(
-                                                        width: 93,
+                                                        alignment: Alignment.center,
+                                                       
                                                         child: Material(
                                                             //  padding: EdgeInsets.symmetric(vertical: 12),
 
-                                                            elevation: 3,
+                                                            elevation: 1.5,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
-                                                                            7)),
+                                                                            8)),
                                                             color: Colors.green,
                                                             child: Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                      .all(8.0),
+                                                                      .symmetric(vertical: 8,horizontal: 16),
                                                               child: Text(
                                                                 'Send Cell',
                                                                 style: TextStyle(

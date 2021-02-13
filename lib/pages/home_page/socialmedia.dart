@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sarasotaapp/pages/menu.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sarasotaapp/pages/home_page/menu.dart';
 import 'package:sarasotaapp/uatheme.dart';
 import 'package:sarasotaapp/widgets/ualabel.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,42 +20,44 @@ class _SocialMediaState extends State<SocialMedia> {
           size: UATheme.headingSize(),
         ),
       ),
-      
       body: Column(
         children: <Widget>[
           ListTile(
+            leading: Icon(
+              FontAwesomeIcons.facebook,
+              color: Colors.blue,
+            ),
             onTap: () async {
               _launchURL('https://www.facebook.com/SarasotaMemorialHospital/');
             },
             title: UALabel(
-              paddingBottom: 20,
-              paddingTop: 20,
-              paddingLeft: 20,
               text: 'Facebook',
             ),
           ),
           line(),
           ListTile(
+            leading: Icon(
+              FontAwesomeIcons.twitter,
+              color: Colors.blue,
+            ),
             onTap: () async {
               _launchURL('https://twitter.com/SMHCS');
             },
             title: UALabel(
-              paddingBottom: 20,
-              paddingTop: 20,
-              paddingLeft: 20,
               text: 'Twitter',
             ),
           ),
           line(),
           ListTile(
+            leading: Icon(
+              FontAwesomeIcons.youtube,
+              color: Colors.red,
+            ),
             onTap: () async {
               _launchURL('https://www.youtube.com/user/SMHCS');
             },
-            title: UALabel(
-              paddingBottom: 20,
-              paddingTop: 20,
-              paddingLeft: 20,
-              text: 'YouTube',
+            title: Text(
+              'YouTube',
             ),
           ),
           line(),

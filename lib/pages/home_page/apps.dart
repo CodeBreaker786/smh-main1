@@ -8,8 +8,6 @@ class Apps extends StatefulWidget {
 }
 
 class _AppsState extends State<Apps> {
-  TextEditingController mobileTextEditingController;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +20,13 @@ class _AppsState extends State<Apps> {
       body: ListView(
         children: <Widget>[
           ListTile(
-            leading: Image.asset(
-              'assets/images/smh_icon.jpg',
+            leading: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+              child: Image.asset(
+                'assets/images/smh_icon.jpg',
+              ),
             ),
             title: Text(
               'Sarasota Memorial',
@@ -41,9 +44,15 @@ class _AppsState extends State<Apps> {
                   iOSAppId: "397478168");
             },
           ),
+          line(),
           ListTile(
-            leading: Image.asset(
-              'assets/images/smh_icon.jpg',
+            leading: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+              child: Image.asset(
+                'assets/images/smh_icon.jpg',
+              ),
             ),
             title: Text(
               'SMH Wayfinder',
@@ -63,6 +72,13 @@ class _AppsState extends State<Apps> {
           ),
         ],
       ),
+    );
+  }
+
+  line() {
+    return Container(
+      height: 1,
+      color: Colors.grey.shade300,
     );
   }
 }
