@@ -134,13 +134,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0-nullsafety.3"
-  fancy_drawer:
-    dependency: "direct main"
-    description:
-      name: fancy_drawer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1"
   file:
     dependency: transitive
     description:
@@ -205,6 +198,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.11"
+  flutter_zoom_drawer:
+    dependency: "direct main"
+    description:
+      name: flutter_zoom_drawer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4+1"
   fluttertoast:
     dependency: "direct main"
     description:

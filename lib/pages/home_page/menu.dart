@@ -72,13 +72,15 @@ class Menu extends StatelessWidget {
               ),
             );
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30),
-            child: Text(
-              'Privacy Policy',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey.shade700,
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 60),
+              child: Text(
+                'Privacy Policy',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey.shade700,
+                ),
               ),
             ),
           ),
