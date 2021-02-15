@@ -45,17 +45,14 @@ dependencies:
   cached_network_image: ^2.3.2+1
   google_maps_flutter: ^0.5.32
   dropdown_search: ^0.4.8
-  fancy_drawer: ^0.0.1
+  flutter_zoom_drawer: ^1.0.4+1
   flushbar: ^1.10.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
   # For information on the generic Dart part of this file, see the
   # following page: https://dart.dev/tools/pub/pubspec
-
   # The following section is specific to Flutter.
 flutter_icons:
   android: true
@@ -63,7 +60,6 @@ flutter_icons:
   image_path: "assets/images/icon.png"
 
 flutter:
-
   uses-material-design: true
   assets:
     - assets/images/
@@ -72,13 +68,10 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

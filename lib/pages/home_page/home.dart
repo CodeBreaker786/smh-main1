@@ -1,5 +1,5 @@
-import 'package:fancy_drawer/fancy_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/model/locationitem.dart';
 import 'package:sarasotaapp/navigation.dart';
@@ -24,43 +24,48 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool seeAll = true;
-  FancyDrawerController _controller;
+  ZoomDrawerController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = FancyDrawerController(
-        vsync: this, duration: Duration(milliseconds: 600))
-      ..addListener(() {
-        setState(() {});
-      });
+    _controller = ZoomDrawerController();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FancyDrawerWrapper(
-        hideOnContentTap: true,
-        backgroundColor: Colors.white10,
-        drawerItems: [
-          Container(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Menu(),
-                ],
+      body: ZoomDrawer(
+        showShadow: true,
+        borderRadius: 24.0,
+        angle: -12.0,
+        backgroundColor: Colors.grey[300],
+        slideWidth: MediaQuery.of(context).size.width *
+            (ZoomDrawer.isRTL() ? .45 : 0.65),
+        menuScreen: InkWell(
+          onTap: () {
+            _controller.close();
+          },
+          child: Container(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Menu(),
+                  ],
+                ),
               )),
-        ],
+        ),
         controller: _controller,
-        child: Container(
+        mainScreen: Container(
             color: UiColors.primaryColor,
             child: Stack(children: [
               Column(

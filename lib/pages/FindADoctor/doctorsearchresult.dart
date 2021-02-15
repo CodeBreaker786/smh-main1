@@ -160,13 +160,14 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 25, vertical: 5),
                                 child: Card(
-                                
                                   //clipBehavior: Clip.antiAlias,
-                                  color: Theme.of(context).primaryColor.withOpacity(.6),
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(.6),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Container(
-                                     color: Colors.transparent,
+                                    color: Colors.transparent,
                                     height: 110,
                                     child: Row(children: [
                                       Container(
@@ -187,31 +188,31 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                       ),
                                       Expanded(
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 5),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
                                           child: ListTile(
-                                            title:   Text(
-                                              _searchResults[position]
-                                                  .fullName,
-                                             
-                                              
-                                              style:
-                                                  TextStyle(fontSize: 17,color: Colors.white),
+                                            title: Text(
+                                              _searchResults[position].fullName,
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  color: Colors.white),
                                             ),
-                                            subtitle: 
-                                              Text(
-                                                _searchResults[position]
-                                                    .specialities,
-                                                maxLines: 3,
-                                                overflow:
-                                                    TextOverflow.ellipsis,
-                                                     style:
-                                                  TextStyle( color: Colors.white70),
-                                              ),
+                                            subtitle: Text(
+                                              _searchResults[position]
+                                                          .specialities ==
+                                                      null
+                                                  ? "No Speciality Found"
+                                                  : _searchResults[position]
+                                                      .specialities,
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  color: Colors.white70),
+                                            ),
                                           ),
                                         ),
                                       ),
                                       Container(
-                                         
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8),
@@ -239,7 +240,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                   elevation: 1.5,
                                                   borderRadius:
                                                       BorderRadius.circular(7),
-                                                  color: Colors.blue ,
+                                                  color: Colors.blue,
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.all(
@@ -284,8 +285,8 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                         }
                                                       },
                                                       child: Container(
-                                                        alignment: Alignment.center,
-                                                       
+                                                        alignment:
+                                                            Alignment.center,
                                                         child: Material(
                                                             //  padding: EdgeInsets.symmetric(vertical: 12),
 
@@ -297,9 +298,11 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                                             8)),
                                                             color: Colors.green,
                                                             child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .symmetric(vertical: 8,horizontal: 16),
+                                                              padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 8,
+                                                                  horizontal:
+                                                                      16),
                                                               child: Text(
                                                                 'Send Cell',
                                                                 style: TextStyle(
