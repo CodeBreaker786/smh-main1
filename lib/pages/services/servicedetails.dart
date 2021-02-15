@@ -39,6 +39,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                   children: <Widget>[
                     UALabel(
                       text: widget.info.title,
+                      color: Colors.grey,
                       paddingLeft: 20,
                       paddingBottom: 10,
                       paddingTop: 20,
@@ -48,6 +49,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                     ),
                     UALabel(
                       text: widget.info.description,
+                      color: Colors.grey,
                       paddingLeft: 20,
                       paddingBottom: 20,
                       paddingTop: 20,
