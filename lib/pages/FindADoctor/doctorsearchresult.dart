@@ -66,6 +66,9 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
       setState(() {
         isLoginLoding = false;
         _isDoctorLoggedIn = e;
+        if (!_isDoctorLoggedIn) {
+          widget.specialties.remove('Administration');
+        }
       });
     });
   }
