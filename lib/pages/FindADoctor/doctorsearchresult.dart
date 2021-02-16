@@ -168,7 +168,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Container(
                                     color: Colors.transparent,
-                                    height: 110,
+                                    height: 130,
                                     child: Row(children: [
                                       Container(
                                         width: 80,
@@ -193,6 +193,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                           child: ListTile(
                                             title: Text(
                                               _searchResults[position].fullName,
+                                              maxLines: 2,
                                               style: TextStyle(
                                                   fontSize: 17,
                                                   color: Colors.white),
