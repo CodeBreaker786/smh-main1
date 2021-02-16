@@ -168,7 +168,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Container(
                                     color: Colors.transparent,
-                                    height: 130,
+                                    height: 110,
                                     child: Row(children: [
                                       Container(
                                         width: 80,
@@ -193,7 +193,6 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                           child: ListTile(
                                             title: Text(
                                               _searchResults[position].fullName,
-                                              maxLines: 2,
                                               style: TextStyle(
                                                   fontSize: 17,
                                                   color: Colors.white),
@@ -205,7 +204,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                   ? "No Speciality Found"
                                                   : _searchResults[position]
                                                       .specialities,
-                                              maxLines: 3,
+                                              maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                   color: Colors.white70),
