@@ -40,6 +40,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: ZoomDrawer(
         showShadow: true,
         borderRadius: 24.0,
@@ -203,24 +204,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     }),
                                   );
                                 }),
-                            // buildListTile(
-                            //    title: 'Find a Doctor',
-                            //    path: 'assets/images/main/find_a_doctor.png'),
-                            // buildListTile(
-                            //    title: 'Find a Doctor',
-                            //    path: 'assets/images/main/find_a_doctor.png'),
-                            // buildListTile(
-                            //    title: 'Find a Doctor',
-                            //    path: 'assets/images/main/find_a_doctor.png'),
-                            // buildListTile(
-                            //    title: 'Find a Doctor',
-                            //    path: 'assets/images/main/find_a_doctor.png'),
-                            // buildListTile(
-                            //    title: 'Find a Doctor',
-                            //    path: 'assets/images/main/find_a_doctor.png'),
-                            // buildListTile(
-                            //     title: 'Find a Doctor',
-                            //     path: 'assets/images/main/find_a_doctor.png'),
                           ],
                         ),
                       ),
@@ -287,7 +270,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.only(bottom: 10),
+                                  margin: EdgeInsets.only(bottom: 5),
                                   alignment: Alignment.center,
                                   child: InkWell(
                                     onTap: () {
@@ -296,7 +279,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     child: Text(
                                       'smh',
                                       style: TextStyle(
-                                          fontSize: 60,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .07,
                                           fontWeight: FontWeight.bold,
                                           color: UiColors.primaryColor),
                                     ),
@@ -342,7 +328,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 padding: const EdgeInsets.only(top: 5, left: 5),
                 child: Text(
                   title,
-                  //overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: 18,
