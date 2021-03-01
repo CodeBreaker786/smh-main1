@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:location/location.dart';
 import 'package:sarasotaapp/appsettings.dart';
 import 'package:sarasotaapp/model/doctor.dart';
@@ -184,7 +185,9 @@ class _DoctorDetailState extends State<DoctorDetail> {
                   style: TextStyle(fontWeight: FontWeight.bold)),
               TextSpan(
                 text: doctor.website,
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(
+                  color: Color(0xff6398EC8),
+                ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () async {
                     Helper.launchURL('https://${doctor.website}');

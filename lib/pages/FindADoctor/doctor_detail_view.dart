@@ -6,6 +6,7 @@ import 'package:sarasotaapp/pages/FindADoctor/helper.dart';
 import 'package:sarasotaapp/pages/FindADoctor/webservices.dart';
 import 'package:sarasotaapp/utils/customLoader.dart';
 import 'package:sarasotaapp/utils/show_flushbar.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class DoctorDetailView extends StatefulWidget {
   Doctor doctor;
@@ -19,7 +20,7 @@ class DoctorDetailView extends StatefulWidget {
 class _DoctorDetailViewState extends State<DoctorDetailView> {
   double _latitude;
   double _longitude;
-  bool isLoding = false;
+  bool isLoading = false;
   CustomLoader customLoader;
   @override
   void initState() {
@@ -37,7 +38,7 @@ class _DoctorDetailViewState extends State<DoctorDetailView> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                  margin: EdgeInsets.symmetric(vertical: 50),
+                  margin: EdgeInsets.symmetric(vertical: 30),
                   color: Theme.of(context).primaryColor,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -73,7 +74,7 @@ class _DoctorDetailViewState extends State<DoctorDetailView> {
                           Container(
                             child: Text(
                               widget.doctor.fullName,
-                              style: TextStyle(fontSize: 26),
+                              style: TextStyle(fontSize: 24),
                             ),
                           ),
                           Padding(
@@ -203,7 +204,7 @@ class _DoctorDetailViewState extends State<DoctorDetailView> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 28, vertical: 20),
+                          horizontal: 28, vertical: 15),
                       child: MaterialButton(
                         height: 50,
                         shape: RoundedRectangleBorder(
@@ -243,12 +244,12 @@ class _DoctorDetailViewState extends State<DoctorDetailView> {
                                 widget.doctor.address.street != null
                                     ? Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 16),
+                                            horizontal: 14),
                                         child: Text(
                                             '${widget.doctor.address.street} ${widget.doctor.address.city} ${widget.doctor.address.state} ${widget.doctor.address.postalCode}',
                                             style: TextStyle(
                                                 color: Colors.grey,
-                                                fontSize: 18)),
+                                                fontSize: 14)),
                                       )
                                     : Container(),
                                 widget.doctor.specialities != null
@@ -374,7 +375,7 @@ class _DoctorDetailViewState extends State<DoctorDetailView> {
       child: Text(
         title,
         style: TextStyle(
-            color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
+            color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
       ),
     );
   }
@@ -382,7 +383,7 @@ class _DoctorDetailViewState extends State<DoctorDetailView> {
   getDoctorInformationTileSubTitle({String subTitle}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Text(subTitle, style: TextStyle(color: Colors.grey, fontSize: 18)),
+      child: Text(subTitle, style: TextStyle(color: Colors.grey, fontSize: 16)),
     );
   }
 }

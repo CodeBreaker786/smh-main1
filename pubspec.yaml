@@ -47,6 +47,7 @@ dependencies:
   dropdown_search: ^0.4.8
   flutter_zoom_drawer: ^1.0.4+1
   flushbar: ^1.10.4
+  hexcolor: ^2.0.0
 
 dev_dependencies:
   flutter_test:

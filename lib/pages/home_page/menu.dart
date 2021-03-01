@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sarasotaapp/colors.dart';
 import 'package:sarasotaapp/pages/home_page/apps.dart';
-
-import 'package:sarasotaapp/pages/privacypolicy.dart';
 import 'package:sarasotaapp/pages/home_page/socialmedia.dart';
-
+import 'package:sarasotaapp/pages/privacypolicy.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Menu extends StatelessWidget {
@@ -14,6 +11,18 @@ class Menu extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        Column(
+          children: [
+            Container(
+              child: Text(
+                'Back to Home',
+                style: TextStyle(color: Color(0xFF629dc8), fontSize: 16),
+              ),
+              padding: EdgeInsets.fromLTRB(10, 10.0, 3.0, 60.0),
+            ),
+          ],
+        ),
+        line(),
         getTileText(
             text: 'Call SMH',
             callback: () {

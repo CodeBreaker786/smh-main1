@@ -368,8 +368,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG9MXVHA6Y;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = 72WH7YVESA;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -385,7 +385,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				MARKETING_VERSION = 6.5.3;
+				MARKETING_VERSION = 6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photobooks.Sarasota;
 				PRODUCT_NAME = Runner;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -506,7 +506,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 72WH7YVESA;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -523,7 +523,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				MARKETING_VERSION = 6.5.3;
+				MARKETING_VERSION = 6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photobooks.Sarasota;
 				PRODUCT_NAME = Runner;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -537,7 +537,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 72WH7YVESA;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -554,7 +554,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				MARKETING_VERSION = 6.5.3;
+				MARKETING_VERSION = 6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.photobooks.Sarasota;
 				PRODUCT_NAME = Runner;
 				TARGETED_DEVICE_FAMILY = 1;

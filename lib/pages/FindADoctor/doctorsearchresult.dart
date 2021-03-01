@@ -147,11 +147,16 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                       ? Center(
                           child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.search,
-                                size: 100,
-                                color: UiColors.primaryColor,
+                              child: Image.asset(
+                                'assets/images/SMHLOGO_HEX.png',
+                                width: 200,
+                                height: 200,
                               )))
+                      // child: Icon(
+                      //   Icons.search,
+                      //   size: 100,
+                      //   color: UiColors.primaryColor,
+                      // )))
                       : ListView.builder(
                           controller: _scrollController,
                           padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
@@ -243,7 +248,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                   elevation: 1.5,
                                                   borderRadius:
                                                       BorderRadius.circular(7),
-                                                  color: Colors.blue,
+                                                  color: Color(0xff00476c),
                                                   child: Padding(
                                                     padding:
                                                         const EdgeInsets.all(
@@ -391,15 +396,14 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                           color: Colors.blueGrey.shade50,
                           borderRadius: BorderRadius.circular(8)),
                       child: TextField(
+                        textAlign: TextAlign.left,
                         controller: _nameController,
                         decoration: InputDecoration(
-                          hintText: 'Search doctor',
+                          hintText: 'Search Doctor',
                           filled: true,
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                            top: 8, // HERE THE IMPORTANT PART
-                          ),
-
+                          contentPadding: EdgeInsets.fromLTRB(
+                              0, 8, 0, 0), // HERE THE IMPORTANT PART
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
@@ -409,11 +413,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                             borderRadius: BorderRadius.circular(10.7),
                           ),
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.grey,
-                            ),
+                            padding: const EdgeInsets.only(left: 0),
                           ),
                           //  prefixIcon: Icon(Icons.search,)
                         ),

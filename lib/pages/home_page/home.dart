@@ -40,14 +40,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
       body: ZoomDrawer(
         showShadow: true,
         borderRadius: 24.0,
-        angle: -12.0,
+        angle: 0.0,
         backgroundColor: Colors.grey[300],
         slideWidth: MediaQuery.of(context).size.width *
-            (ZoomDrawer.isRTL() ? .45 : 0.65),
+            (ZoomDrawer.isRTL() ? .45 : 0.75),
         menuScreen: InkWell(
           onTap: () {
             _controller.close();
@@ -133,12 +132,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                   ),
                   ListTile(
-                    title: Text(
-                      'How may we help you?',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),
+                    title: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'How may we help you?',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
                     ),
                     trailing: InkWell(
                       onTap: () {
@@ -154,7 +156,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     flex: 2,
                     child: Stack(children: [
                       Container(
-                        margin: EdgeInsets.only(left: 14),
+                        margin: EdgeInsets.only(left: 10),
                         height: MediaQuery.of(context).size.height * .25,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
@@ -170,7 +172,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   );
                                 }),
                             buildListTile(
-                                title: 'Our Serives',
+                                title: 'Our Services',
                                 path: 'assets/images/main/our_serives.png',
                                 callBack: () {
                                   Navigator.of(context).push(
@@ -270,24 +272,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.only(bottom: 5),
-                                  alignment: Alignment.center,
-                                  child: InkWell(
-                                    onTap: () {
-                                      Helper.launchURL('https://www.smh.com');
-                                    },
-                                    child: Text(
-                                      'smh',
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              .07,
-                                          fontWeight: FontWeight.bold,
-                                          color: UiColors.primaryColor),
-                                    ),
-                                  ),
-                                ),
+                                    margin: EdgeInsets.only(bottom: 5),
+                                    alignment: Alignment.center,
+                                    child: InkWell(
+                                      onTap: () {
+                                        Helper.launchURL('https://www.smh.com');
+                                      },
+                                      child: Image.asset(
+                                        "assets/images/SMHlogo.png",
+                                        alignment: Alignment.center,
+                                      ),
+                                    )),
                               ),
                             ],
                           ))),

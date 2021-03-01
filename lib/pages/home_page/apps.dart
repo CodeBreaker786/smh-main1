@@ -25,11 +25,11 @@ class _AppsState extends State<Apps> {
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
               child: Image.asset(
-                'assets/images/smh_icon.jpg',
+                'assets/images/icon.jpg',
               ),
             ),
             title: Text(
-              'Sarasota Memorial',
+              'SMH Urgent Care',
             ),
             subtitle: Text(
               'Download',
@@ -39,9 +39,8 @@ class _AppsState extends State<Apps> {
             ),
             onTap: () {
               StoreRedirect.redirect(
-                  androidAppId:
-                      "com.soln.SE35BCA74A3BE95A854E67E90FEB1DBB3&hl=en_US",
-                  iOSAppId: "397478168");
+                  androidAppId: "com.soln.S9151C8A3525748378EEF590856613786",
+                  iOSAppId: "1438233567");
             },
           ),
           line(),
@@ -51,7 +50,7 @@ class _AppsState extends State<Apps> {
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
               child: Image.asset(
-                'assets/images/smh_icon.jpg',
+                'assets/images/wayfindericon.jpg',
               ),
             ),
             title: Text(
@@ -65,9 +64,57 @@ class _AppsState extends State<Apps> {
             ),
             onTap: () {
               StoreRedirect.redirect(
-                  androidAppId:
-                      "com.soln.SE35BCA74A3BE95A854E67E90FEB1DBB3&hl=en_US",
-                  iOSAppId: "397478168");
+                  androidAppId: "com.logicjunction.smh.wayfinder",
+                  iOSAppId: "1234682654");
+            },
+          ),
+          line(),
+          ListTile(
+            leading: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+              child: Image.asset(
+                'assets/images/bariatricicon.jpg',
+              ),
+            ),
+            title: Text(
+              'SMH Bariatric Surgery',
+            ),
+            subtitle: Text(
+              'Download',
+              style: TextStyle(
+                color: Colors.blue,
+              ),
+            ),
+            onTap: () {
+              StoreRedirect.redirect(
+                  androidAppId: "com.soln.SCAA21C31421B4D6596B183509DFD0184",
+                  iOSAppId: "1422806614");
+            },
+          ),
+          line(),
+          ListTile(
+            leading: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+              child: Image.asset(
+                'assets/images/yomingoicon.jpg',
+              ),
+            ),
+            title: Text(
+              'YoMingo(SMH Baby)',
+            ),
+            subtitle: Text(
+              'Download',
+              style: TextStyle(
+                color: Colors.blue,
+              ),
+            ),
+            onTap: () {
+              StoreRedirect.redirect(
+                  androidAppId: "com.cci.yomingo", iOSAppId: "1377789095");
             },
           ),
         ],
