@@ -6,7 +6,6 @@ import 'package:sarasotaapp/pages/FindADoctor/helper.dart';
 import 'package:sarasotaapp/pages/FindADoctor/webservices.dart';
 import 'package:sarasotaapp/utils/customLoader.dart';
 import 'package:sarasotaapp/utils/show_flushbar.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class DoctorDetailView extends StatefulWidget {
   Doctor doctor;

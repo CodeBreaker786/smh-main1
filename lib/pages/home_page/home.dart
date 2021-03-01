@@ -206,6 +206,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     }),
                                   );
                                 }),
+                            buildListTile(
+                                title: 'SMH Wayfinder',
+                                path: 'assets/images/main/Asset 7@4x.png',
+                                callBack: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return SurgeryStatus(
+                                            url: 'https://surgerystatus.smh.com',
+                                          );
+                                        }),
+                                  );
+                                }),
                           ],
                         ),
                       ),

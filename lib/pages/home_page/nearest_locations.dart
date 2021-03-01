@@ -25,7 +25,7 @@ class _NearestLocationsState extends State<NearestLocations> {
         padding: const EdgeInsets.only(top: 30),
         child: GridView.count(
           crossAxisCount: 2,
-          childAspectRatio: 0.9,
+          childAspectRatio: 0.85,
           children: [
             ...widget.cardsData.map(
               (e) => _buildListCard(
