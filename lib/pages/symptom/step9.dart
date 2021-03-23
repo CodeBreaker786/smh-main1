@@ -69,6 +69,7 @@ class _Step9State extends State<Step9> {
                         text:
                             'Do you feel better after taking medication for your symptoms?',
                         size: UATheme.largeSize(),
+                        color: Colors.grey.shade900,
                       ),
                     ),
                     RadioListTile(

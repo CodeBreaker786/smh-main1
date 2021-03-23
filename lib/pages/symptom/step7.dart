@@ -67,6 +67,7 @@ class _Step7State extends State<Step7> {
                       child: UALabel(
                         text: 'How much pain or discomfort are you in?',
                         size: UATheme.largeSize(),
+                        color: Colors.grey.shade900,
                       ),
                     ),
                     RadioListTile(

@@ -68,6 +68,7 @@ class _Step6State extends State<Step6> {
                         text:
                             'How have your symptoms changed over the last few hours/days?',
                         size: UATheme.largeSize(),
+                        color: Colors.grey.shade900,
                       ),
                     ),
                     RadioListTile(

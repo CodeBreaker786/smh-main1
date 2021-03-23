@@ -71,6 +71,7 @@ class _Step2State extends State<Step2> {
                         child: UALabel(
                           text: 'What are your symptoms?',
                           size: UATheme.largeSize(),
+                          color: Colors.grey.shade900,
                         ),
                       ),
                       Container(

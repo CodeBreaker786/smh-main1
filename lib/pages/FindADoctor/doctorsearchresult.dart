@@ -147,10 +147,10 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                       ? Center(
                           child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.search,
-                                size: 100,
-                                color: UiColors.primaryColor,
+                              child: Image.asset(
+                                'assets/images/SMH1024.jpg',
+                                width: 200,
+                                height: 200,
                               )))
                       : ListView.builder(
                           controller: _scrollController,

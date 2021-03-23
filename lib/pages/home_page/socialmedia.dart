@@ -61,6 +61,32 @@ class _SocialMediaState extends State<SocialMedia> {
             ),
           ),
           line(),
+          ListTile(
+            leading: Icon(
+              FontAwesomeIcons.instagram,
+              color: Colors.redAccent,
+            ),
+            onTap: () async {
+              _launchURL('https://www.instagram.com/smhcs/');
+            },
+            title: Text(
+              'Instagram',
+            ),
+          ),
+          line(),
+          ListTile(
+            leading: Icon(
+              FontAwesomeIcons.linkedin,
+              color: Colors.blue.shade900,
+            ),
+            onTap: () async {
+              _launchURL('https://www.linkedin.com/company/sarasota-memorial-health-care-system/');
+            },
+            title: Text(
+              'Linkedin',
+            ),
+          ),
+          line(),
         ],
       ),
     );
