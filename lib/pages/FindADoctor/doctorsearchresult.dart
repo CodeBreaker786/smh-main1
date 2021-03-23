@@ -66,9 +66,6 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
       setState(() {
         isLoginLoding = false;
         _isDoctorLoggedIn = e;
-        if (!_isDoctorLoggedIn) {
-          widget.specialties.remove('Administration');
-        }
       });
     });
   }
@@ -207,7 +204,7 @@ class _DoctorSearchResultState extends State<DoctorSearchResult> {
                                                   ? "No Speciality Found"
                                                   : _searchResults[position]
                                                       .specialities,
-                                              maxLines: 2,
+                                              maxLines: 3,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                   color: Colors.white70),

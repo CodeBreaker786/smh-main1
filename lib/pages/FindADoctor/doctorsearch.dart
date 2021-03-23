@@ -47,9 +47,6 @@ class _DoctorSearchState extends State<DoctorSearch> {
       _specialities.sort();
       _isLoading = false;
       _isDoctorLoggedIn = isDoctorLoggedIn;
-      if (!_isDoctorLoggedIn) {
-        _specialities.remove('Administration');
-      }
     });
   }
 

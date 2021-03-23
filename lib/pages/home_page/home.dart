@@ -42,7 +42,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
       body: ZoomDrawer(
         showShadow: true,
         borderRadius: 24.0,
@@ -243,8 +242,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     }),
                                   );
                                 }),
-<<<<<<< Updated upstream
-=======
 
 
                             // buildListTile(
@@ -265,7 +262,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             // buildListTile(
                             //     title: 'Find a Doctor',
                             //     path: 'assets/images/main/find_a_doctor.png'),
->>>>>>> Stashed changes
                           ],
                         ),
                       ),
@@ -332,23 +328,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.only(bottom: 5),
+                                  margin: EdgeInsets.only(bottom: 10),
                                   alignment: Alignment.center,
                                   child: InkWell(
                                     onTap: () {
                                       Helper.launchURL('https://www.smh.com');
                                     },
-<<<<<<< Updated upstream
-                                    child: Text(
-                                      'smh',
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              .07,
-                                          fontWeight: FontWeight.bold,
-                                          color: UiColors.primaryColor),
-=======
                                     child: Container(
                                       padding: EdgeInsets.only(bottom: 20),
                                       height: 70,
@@ -356,7 +341,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         "assets/images/SMHlogo.png",
                                         alignment: Alignment.center,
                                       ),
->>>>>>> Stashed changes
                                     ),
                                   ),
                                 ),
@@ -400,8 +384,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 padding: const EdgeInsets.only(top: 5, left: 5),
                 child: Text(
                   title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  //overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: 18,
