@@ -49,6 +49,7 @@ class _Step3State extends State<Step3> {
           title: UALabel(
             text: 'Symptom Checker',
             size: UATheme.headingSize(),
+            color: Colors.grey.shade900,
           ),
         ),
         body: Column(
@@ -58,6 +59,7 @@ class _Step3State extends State<Step3> {
               child: UALabel(
                 text: 'Likely Diagnoses',
                 size: UATheme.largeSize(),
+                color: Colors.grey.shade900,
               ),
             ),
             Expanded(

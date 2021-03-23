@@ -70,127 +70,93 @@ class _SymptomCheckerState extends State<SymptomChecker> {
           children: <Widget>[
             Expanded(
               child: Center(
-                  child: Column(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 120.0),
+                    child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: UALabel(
-                      text: 'Enter Your Information',
-                      size: UATheme.largeSize(),
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: UALabel(
+                        text: 'Enter Your Information',
+                        size: UATheme.largeSize(),
+                        color: Colors.grey.shade900,
+                      ),
                     ),
-                  ),
-                  Container(
-                    color: Colors.grey,
-                    height: 1,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: DropdownButton<String>(
-                      hint: UALabel(
-                        text: selectedAge,
-                        color: Colors.grey.shade900,
-                      ),
-                      icon: Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.grey.shade900,
-                      ),
-                      underline: Container(),
-                      isExpanded: true,
-                      items: ageGroups != null
-                          ? ageGroups.ageGroup1.ageGroup
-                              .map(
-                                (map) => DropdownMenuItem(
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    child: UALabel(
-                                      text: map.name +
-                                          " (" +
-                                          map.yr_from +
-                                          "-" +
-                                          map.yr_to +
-                                          ")",
+                    Container(
+                      color: Colors.grey,
+                      height: 1,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: DropdownButton<String>(
+                        hint: UALabel(
+                          text: selectedAge,
+                          color: Colors.grey.shade900,
+                        ),
+                        icon: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.grey.shade900,
+                        ),
+                        underline: Container(),
+                        isExpanded: true,
+                        items: ageGroups != null
+                            ? ageGroups.ageGroup1.ageGroup
+                                .map(
+                                  (map) => DropdownMenuItem(
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      child: UALabel(
+                                        text: map.name +
+                                            " (" +
+                                            map.yr_from +
+                                            "-" +
+                                            map.yr_to +
+                                            ")",
+                                      ),
                                     ),
+                                    value: map.name,
                                   ),
-                                  value: map.name,
-                                ),
-                              )
-                              .toList()
-                          : [],
-                      onChanged: (String val) {
-                        selectedAge = val;
-                        setState(() {
+                                )
+                                .toList()
+                            : [],
+                        onChanged: (String val) {
                           selectedAge = val;
-                        });
-                      },
+                          setState(() {
+                            selectedAge = val;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: 1,
-                    color: Colors.grey.shade200,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: RadioListTile(
-                            value: 0,
-                            groupValue: isMale,
-                            onChanged: (newValue) =>
-                                setState(() => isMale = newValue),
-                            title: UALabel(
-                              text: 'Female',
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: RadioListTile(
-                            value: 1,
-                            groupValue: isMale,
-                            onChanged: (newValue) =>
-                                setState(() => isMale = newValue),
-                            title: UALabel(
-                              text: 'Male',
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ],
+                    Container(
+                      height: 1,
+                      color: Colors.grey.shade200,
                     ),
-                  ),
-                  Visibility(
-                    visible: isMale == 0,
-                    child: Padding(
+                    Padding(
                       padding: EdgeInsets.all(10),
                       child: Row(
                         children: <Widget>[
-                          UALabel(
-                            text: 'Are you Pregnant?',
-                            color: Colors.black,
-                          ),
                           Expanded(
                             child: RadioListTile(
-                              value: 1,
-                              groupValue: isPregnant,
+                              value: 0,
+                              groupValue: isMale,
                               onChanged: (newValue) =>
-                                  setState(() => isPregnant = newValue),
+                                  setState(() => isMale = newValue),
                               title: UALabel(
-                                text: 'Yes',
+                                text: 'Female',
                                 color: Colors.black,
                               ),
                             ),
                           ),
                           Expanded(
                             child: RadioListTile(
-                              value: 0,
-                              groupValue: isPregnant,
+                              value: 1,
+                              groupValue: isMale,
                               onChanged: (newValue) =>
-                                  setState(() => isPregnant = newValue),
+                                  setState(() => isMale = newValue),
                               title: UALabel(
-                                text: 'No',
+                                text: 'Male',
                                 color: Colors.black,
                               ),
                             ),
@@ -198,54 +164,92 @@ class _SymptomCheckerState extends State<SymptomChecker> {
                         ],
                       ),
                     ),
-                  ),
-                  Container(
-                    height: 1,
-                    color: Colors.grey.shade200,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: DropdownButton<String>(
-                      items: regions != null
-                          ? regions.travelHistory.region
-                              .map(
-                                (map) => DropdownMenuItem(
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    child: UALabel(
-                                      text: map.region_name,
-                                    ),
-                                  ),
-                                  value: map.region_name,
+                    Visibility(
+                      visible: isMale == 0,
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          children: <Widget>[
+                            UALabel(
+                              text: 'Are you Pregnant?',
+                              color: Colors.black,
+                            ),
+                            Expanded(
+                              child: RadioListTile(
+                                value: 1,
+                                groupValue: isPregnant,
+                                onChanged: (newValue) =>
+                                    setState(() => isPregnant = newValue),
+                                title: UALabel(
+                                  text: 'Yes',
+                                  color: Colors.black,
                                 ),
-                              )
-                              .toList()
-                          : [],
-                      hint: UALabel(
-                        text: selectedRegion,
-                        color: Colors.grey.shade900,
+                              ),
+                            ),
+                            Expanded(
+                              child: RadioListTile(
+                                value: 0,
+                                groupValue: isPregnant,
+                                onChanged: (newValue) =>
+                                    setState(() => isPregnant = newValue),
+                                title: UALabel(
+                                  text: 'No',
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      icon: Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.grey.shade900,
-                      ),
-                      underline: Container(),
-                      isExpanded: true,
-                      onChanged: (String val) {
-                        selectedRegion = val;
-                        setState(() {
-                          selectedRegion = val;
-                        });
-                      },
                     ),
-                  ),
-                  Container(
-                    color: Colors.grey,
-                    height: 1,
-                  ),
+                    Container(
+                      height: 1,
+                      color: Colors.grey.shade200,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: DropdownButton<String>(
+                        items: regions != null
+                            ? regions.travelHistory.region
+                                .map(
+                                  (map) => DropdownMenuItem(
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      child: UALabel(
+                                        text: map.region_name,
+                                      ),
+                                    ),
+                                    value: map.region_name,
+                                  ),
+                                )
+                                .toList()
+                            : [],
+                        hint: UALabel(
+                          text: selectedRegion,
+                          color: Colors.grey.shade900,
+                        ),
+                        icon: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.grey.shade900,
+                        ),
+                        underline: Container(),
+                        isExpanded: true,
+                        onChanged: (String val) {
+                          selectedRegion = val;
+                          setState(() {
+                            selectedRegion = val;
+                          });
+                        },
+                      ),
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      height: 1,
+                    ),
                 ],
-              )),
+              ),
+                  )),
             ),
             Container(
               color: Colors.grey.shade300,

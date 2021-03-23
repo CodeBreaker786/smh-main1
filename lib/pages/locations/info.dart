@@ -3,7 +3,7 @@ class Info {
     'Cape Outpatient Surgery Center',
     'Heart Pavilion',
     'Bayside Center for Behavioral Health',
-    'SMH Main Campus',
+    'SMH Sarasota Campus',
     'University Parkway Health Care Center',
     'Urgent Care Center at University Parkway',
     'Urgent Care Center at St. Armands Circle',

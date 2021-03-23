@@ -68,6 +68,7 @@ class _Step5State extends State<Step5> {
                       child: UALabel(
                         text: 'How long have you had your symptoms?',
                         size: UATheme.largeSize(),
+                        color: Colors.grey.shade900,
                       ),
                     ),
                     RadioListTile(

@@ -14,6 +14,17 @@ class Menu extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        Column(
+          children: [
+            Container(
+              child: Text(
+                'Back to Home',
+                style: TextStyle(color: Color(0xFF629dc8), fontSize: 16),
+              ),
+              padding: EdgeInsets.fromLTRB(10, 10.0, 3.0, 60.0),
+            ),
+          ],
+        ),
         getTileText(
             text: 'Call SMH',
             callback: () {
@@ -30,18 +41,21 @@ class Menu extends StatelessWidget {
             url: 'assets/images/patient_portal.png'),
         line(),
         getTileText(
-            text: 'Careers',
-            callback: () {
-              _launchURL.call('https://careers.smh.com/careers/');
-            },
-            url: 'assets/images/careers.png'),
-        line(),
-        getTileText(
             text: 'Bill Pay',
             callback: () {
               _launchURL.call('https://smh.ci.healthpay24.cloud/');
             },
             url: 'assets/images/bill_pay.png'),
+        line(),
+        getTileText(
+            text: 'Social Media',
+            callback: () {
+              Navigator.of(context).push(
+                new MaterialPageRoute(
+                    builder: (BuildContext context) => SocialMedia()),
+              );
+            },
+            url: 'assets/images/social_media.png'),
         line(),
         getTileText(
             text: 'Apps',
@@ -54,14 +68,12 @@ class Menu extends StatelessWidget {
             url: 'assets/images/more_apps.png'),
         line(),
         getTileText(
-            text: 'Social Media',
+            text: 'Careers',
             callback: () {
-              Navigator.of(context).push(
-                new MaterialPageRoute(
-                    builder: (BuildContext context) => SocialMedia()),
-              );
+              _launchURL.call('https://careers.smh.com/careers/');
             },
-            url: 'assets/images/social_media.png'),
+            url: 'assets/images/careers.png'),
+        line(),
         InkWell(
           onTap: () {
             Navigator.of(context).push(

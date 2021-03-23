@@ -68,6 +68,7 @@ class _Step10State extends State<Step10> {
                         text:
                             'Do you have any other serious, long term conditions?',
                         size: UATheme.largeSize(),
+                        color: Colors.grey.shade900,
                       ),
                     ),
                     RadioListTile(

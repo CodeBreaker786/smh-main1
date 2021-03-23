@@ -12,6 +12,7 @@ class NearestLocations extends StatefulWidget {
 }
 
 class _NearestLocationsState extends State<NearestLocations> {
+<<<<<<< Updated upstream
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +53,51 @@ class _NearestLocationsState extends State<NearestLocations> {
   }
 
   _buildListCard({String title, String path, Function callBack}) {
+=======
+     @override
+     Widget build(BuildContext context) {
+       return Scaffold(
+         appBar: AppBar(
+           title: Text(
+             'Nearest Locations',
+             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+           ),
+         ),
+         body: Padding(
+           padding: const EdgeInsets.only(top: 20),
+           child: GridView.count(
+             crossAxisCount: 2,
+             childAspectRatio: 0.88,
+             children: [
+                  ...widget.cardsData.map(
+                                    (e) => _buildListCard(
+                                        path: e.image, 
+                                        title: e.title,
+                                        callBack: () {
+                                           Navigation.open(
+                    context,
+                    LocationDetails(
+                      info:  e,
+                      distance: e.distance != null
+                          ? '${e.distance} mi'
+                          : '',
+                      latitude: e.latitude,
+                      longitude: e.longitude,
+                      address: e.mapAddress,
+                      //address:list[i].address,
+                    ),
+                  );
+                                        }),
+                                  )
+             ],
+           ),
+         ),
+       );
+       
+      
+     }
+      _buildListCard({String title, String path, Function callBack}) {
+>>>>>>> Stashed changes
     return InkWell(
       onTap: () {
         callBack();
@@ -91,6 +137,7 @@ class _NearestLocationsState extends State<NearestLocations> {
                     ),
                   ),
                 ),
+<<<<<<< Updated upstream
                 Container(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5, left: 5),
@@ -102,6 +149,17 @@ class _NearestLocationsState extends State<NearestLocations> {
                         color: Colors.grey,
                       ),
                     ),
+=======
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, left: 5),
+                child: Text(
+                  'Sarasota, Florida',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+>>>>>>> Stashed changes
                   ),
                 ),
               ],

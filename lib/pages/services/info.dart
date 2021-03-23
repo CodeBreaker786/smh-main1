@@ -14,7 +14,7 @@ class Info {
     'Employee Assistance Program',
     'HealthLine Physician Referral',
     'Heart & Vascular Services',
-    'Heart Failure Centre',
+    'Heart Failure Center',
     'Home Care',
     'Hyperbaric Medicine',
     'Infusion Therapy',

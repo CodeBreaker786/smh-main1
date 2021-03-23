@@ -68,6 +68,7 @@ class _Step8State extends State<Step8> {
                         text:
                             'How are your symptoms affecting your daily activities?',
                         size: UATheme.largeSize(),
+                        color: Colors.grey.shade900,
                       ),
                     ),
                     RadioListTile(

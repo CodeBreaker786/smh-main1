@@ -79,16 +79,16 @@ class _ResultState extends State<Result> {
               child: UALabel(
                 alignment: TextAlign.center,
                 text:
-                    'This is just a suggestion of where you chould go now and should not be relied on over and above your own instinct and judgement',
+                    'This is just a suggestion of where you could go now and should not be relied on over and above your own instinct and judgment.',
                 color: Colors.black,
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: SliderTheme(
                 data: SliderTheme.of(context).copyWith(
-                  activeTrackColor: Colors.white,
-                  inactiveTrackColor: Colors.white,
+                  activeTrackColor: Color(0xFFFFFF),
+                  inactiveTrackColor: Color(0xFFFFFF),
                   trackHeight: 1.0,
                   thumbColor: Colors.black,
                   thumbShape: SliderThumbImage(customImage),
@@ -120,9 +120,12 @@ class _ResultState extends State<Result> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                UALabel(text: 'Urgent Care'),
-                UALabel(text: 'Family Doctor'),
-                UALabel(text: 'Emergency')
+                UALabel(text: 'Urgent Care',
+                  color: Colors.grey.shade900,),
+                UALabel(text: 'Family Doctor',
+                  color: Colors.grey.shade900,),
+                UALabel(text: 'Emergency',
+                  color: Colors.grey.shade900,)
               ],
             ),
             Padding(

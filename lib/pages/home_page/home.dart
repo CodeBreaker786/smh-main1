@@ -14,6 +14,8 @@ import 'package:sarasotaapp/pages/surgerystatus.dart';
 import 'package:sarasotaapp/pages/symptom/step1.dart';
 import 'package:sarasotaapp/utils/navigation_style.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:store_redirect/store_redirect.dart';
+import 'package:sarasotaapp/pages/smhevents.dart';
 
 class Home extends StatefulWidget {
   List<LocationItem> cardsData = [];
@@ -44,7 +46,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       body: ZoomDrawer(
         showShadow: true,
         borderRadius: 24.0,
-        angle: -12.0,
+        angle: -0.0,
         backgroundColor: Colors.grey[300],
         slideWidth: MediaQuery.of(context).size.width *
             (ZoomDrawer.isRTL() ? .45 : 0.65),
@@ -76,7 +78,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     child: Container(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
+                          horizontal: 8.0,
+                          vertical: 40.0,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,13 +93,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 _controller.toggle();
                               },
                             ),
-                            Text(
-                              'Sarasota Memorial',
-                              style: TextStyle(fontSize: 18),
-                              // style: Theme.of(context).textTheme.bodyText1,
+                            Padding(
+                              padding: const EdgeInsets.only(top:10.0),
+                              child: Text(
+                                'Sarasota Memorial',
+                                style: TextStyle(fontSize: 18),
+                                // style: Theme.of(context).textTheme.bodyText1,
+                              ),
                             ),
                             Container(
-                              width: 35,
+                              width: 50,
                             )
                           ],
                         ),
@@ -170,14 +176,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   );
                                 }),
                             buildListTile(
-                                title: 'Our Serives',
-                                path: 'assets/images/main/our_serives.png',
+                                title: 'Our Locations',
+                                path: 'assets/images/main/ourlocations.png',
                                 callBack: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                      return OurServices();
-                                    }),
+                                          return new NearestLocations(cardsData: widget.cardsData);
+                                        }),
                                   );
                                 }),
                             buildListTile(
@@ -187,8 +193,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                      return SymptomChecker();
-                                    }),
+                                          return SymptomChecker();
+                                        }),
                                   );
                                 }),
                             buildListTile(
@@ -198,12 +204,68 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                      return SurgeryStatus(
-                                        url: 'https://surgerystatus.smh.com',
-                                      );
+                                          return SurgeryStatus(
+                                            url: 'https://surgerystatus.smh.com',
+                                          );
+                                        }),
+                                  );
+                                }),
+                            buildListTile(
+                                title: 'SMH Events',
+                                path: 'assets/images/main/eventscalendar.png',
+                                callBack: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return SMHEvents(
+                                            url: 'https://www.smh.com/Calendar',
+                                          );
+                                        }),
+                                  );
+                                }),
+                            buildListTile(
+                              title: 'SMH Wayfinder',
+                              path: 'assets/images/main/smhwayfinder.png',
+                              callBack: ()  {
+                                StoreRedirect.redirect(
+                                    androidAppId: "com.logicjunction.smh.wayfinder",
+                                    iOSAppId: "1234682654");
+                              },
+                            ),
+                            buildListTile(
+                                title: 'Our Services',
+                                path: 'assets/images/main/our_serives.png',
+                                callBack: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                      return OurServices();
                                     }),
                                   );
                                 }),
+<<<<<<< Updated upstream
+=======
+
+
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //    title: 'Find a Doctor',
+                            //    path: 'assets/images/main/find_a_doctor.png'),
+                            // buildListTile(
+                            //     title: 'Find a Doctor',
+                            //     path: 'assets/images/main/find_a_doctor.png'),
+>>>>>>> Stashed changes
                           ],
                         ),
                       ),
@@ -276,6 +338,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                     onTap: () {
                                       Helper.launchURL('https://www.smh.com');
                                     },
+<<<<<<< Updated upstream
                                     child: Text(
                                       'smh',
                                       style: TextStyle(
@@ -285,6 +348,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                               .07,
                                           fontWeight: FontWeight.bold,
                                           color: UiColors.primaryColor),
+=======
+                                    child: Container(
+                                      padding: EdgeInsets.only(bottom: 20),
+                                      height: 70,
+                                      child: Image.asset(
+                                        "assets/images/SMHlogo.png",
+                                        alignment: Alignment.center,
+                                      ),
+>>>>>>> Stashed changes
                                     ),
                                   ),
                                 ),
@@ -340,7 +412,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               Padding(
                 padding: const EdgeInsets.only(top: 5, left: 5),
                 child: Text(
-                  'Sarasota , Florida',
+                  'Sarasota, Florida',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,

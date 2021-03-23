@@ -67,6 +67,7 @@ class _Step4State extends State<Step4> {
                       child: UALabel(
                         text: 'How quickly did your symptoms develop?',
                         size: UATheme.largeSize(),
+                        color: Colors.grey.shade900,
                       ),
                     ),
                     RadioListTile(
